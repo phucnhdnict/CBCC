@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+  <name>dmdaotao</name>
+  <!-- The following elements are optional and free of formatting conttraints -->
+  <creationDate>February 2008</creationDate>
+  <author>Lê Hữu Thịnh</author>
+  <authorEmail>thinhlh@danang.gov.vn</authorEmail>
+  <license>GNU/GPL</license>
+  <!--  The version string is recorded in the components table -->
+  <version>3.1</version>
+  <!-- The description is optional and defaults to the name -->
+  <description>
+    </description>
+<!----> 
+  <install>
+    <sql >
+      <!--file driver="mysql">instal.sql</file-->
+    </sql>
+  </install>
+  <uninstall>
+    <sql >
+    </sql>
+  </uninstall>
+ 
+  
+  <files folder="admin">
+    <!--filename>install.sql</filename-->
+  </files>
+  
+  <administration>
+    <!-- Administration Menu Section -->
+    <menu img="components/com_dmdaotao/images/dmdaotao.png" alt="Đào tạo NCKH">com_dmdaotao</menu>
+    <submenu>
+      <!-- Note that all & must be escaped to &amp; for the file to be valid XML and be parsed by the installer -->
+      <menu link="option=com_dmdaotao&amp;controller=chuyennganhdaotao&amp;IdDonVi=-1" alt="Chuyên ngành đào tạo">com_dmdaotao_chuyennganhdaotao</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=loaitrinhdo" alt="Loại trình độ đào tạo bồi dưỡng">com_dmdaotao_loaitrinhdo</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=trinhdo" alt="Trình độ đào tạo bồi dưỡng">com_dmdaotao_trinhdo</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=hinhthuctotnghiep" alt="Hình thức tốt nghiệp">com_dmdaotao_hinhthuctotnghiep</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=loaihinhdaotao" alt="Loại hình đạo tạo">com_dmdaotao_loaihinhdaotao</menu>
+      <menu link="option=com_dmdaotao&amp;controller=loaivanbangchungchi" alt="Loại văn bằng chứng chỉ">com_dmdaotao_loaivanbangchungchi</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=truongdaotao&amp;IdDonVi=-26" alt="Trường đào tạo">com_dmdaotao_truongdaotao</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=nguonkinhphidaotao" alt="Nguồn kinh phí đào tạo">com_dmdaotao_nguonkinhphidaotao</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=capdetainckh" alt="Cấp đề tài NCKH">com_dmdaotao_capdetainckh</menu>
+	  <menu link="option=com_dmdaotao&amp;controller=linhvucnckh" alt="Lĩnh vực NCKH">com_dmdaotao_linhvucnckh</menu>
+    </submenu>
+    <!-- Administration Main File Copy Section -->
+    <!-- Note the folder attribute: This attribute describes the folder    to copy FROM in the package to install therefore files copied    in this section are copied from /admin/ in the package -->
+    <files folder="admin">
+      <filename>index.html</filename>
+      <filename>dmdaotao.php</filename>
+      
+      <!-- install controllers -->
+	  <folder>controllers</folder>
+      <!-- install model - one for all -->
+      <folder>models</folder>
+	  <!--install tables-->
+	  <folder>tables</folder>
+      <!-- install views -->
+	  <folder>views</folder>
+	 
+      <filename>images/dmdaotao.png</filename>
+    </files>
+    <languages folder="admin">		
+		<language tag="en-GB">language/en-GB.com_dmdaotao.ini</language>
+		<language tag="vi-VN">language/vi-VN.com_dmdaotao.ini</language>
+	</languages>
+ <!-- -->   
+    <files folder="admin/sql">
+    <!-- database script -->
+      <!--filename>install.dmcongtac.sql</filename>
+      <filename>uninstall.dmcongtac.sql</filename-->
+    </files>
+ 
+    <!-- Administration Language File Copy Section -->
+    <!-- Administration Main Media File Copy Section -->
+    <!--<media folder="admin/images" destination="com_dmcongtac/images">
+    <media folder="admin/images">
+      <filename>dmcongtac.png</filename>
+    </media>-->
+  </administration>
+</extension>

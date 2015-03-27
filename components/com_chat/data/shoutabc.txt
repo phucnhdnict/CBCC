@@ -1,0 +1,1 @@
+a:2:{i:0;a:3:{s:4:"time";i:0;s:4:"user";s:5:"Admin";s:3:"msg";s:34:"Type [!help] for more information.";}i:1;a:5:{s:4:"time";i:1398305716;s:4:"user";s:6:"linhtv";s:3:"msg";s:4:"aaaa";s:5:"color";s:7:"Default";s:2:"ip";s:9:"127.0.0.1";}}

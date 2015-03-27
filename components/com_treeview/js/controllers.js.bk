@@ -1,0 +1,335 @@
+'use strict';
+
+/* Controllers */
+app.controller('HomeCtrl', ['$scope',function($scope) {
+  // $scope.product = {};
+
+}]);
+app.controller('CaydonviCtrl', ['$scope','$routeParams','$location','flash','Caydonvi','TochucPagination',function($scope,$routeParams,$location, flash, Caydonvi,TochucPagination) {
+    $scope.maxSize = 5;
+    $scope.currentPage = 1;
+    $scope.limitPage = Core.limitPage;
+    $scope.parents = [];
+    Caydonvi.query({action:"getOption"},function(response){
+        $scope.parents = response.data;
+    });
+    $scope.doSearch = function() {
+        $scope.pageChanged(1);
+    };
+    $scope.doReset = function() {
+        $scope.filter_search = '';
+        $scope.pageChanged(1);
+    };
+    $scope.pageChanged = function(page) {
+        var start = (page - 1)*$scope.limitPage;
+        Caydonvi.query({page:page,limit:$scope.limitPage,start:start,search:$scope.filter_search,parent_id:$scope.parent_id},function(response){
+            $scope.items = response.data;
+            if($scope.limitPage == 0){
+                $scope.noOfPages = 0;
+            }else{
+                $scope.noOfPages =  Math.ceil(response.total / $scope.limitPage);
+            }
+        });
+    };
+    // console.log($scope.items);
+    $scope.save = function(caydonvi){
+        if(angular.equals(caydonvi.id,undefined)){
+            Caydonvi.create({},caydonvi,function(response){
+                //console.log(data);
+                $scope.pageChanged($scope.currentPage);
+                $scope.close();
+                if(angular.equals(response.errCode,0)){
+                    flash('Lưu thành công!');
+                }else{
+                    flash('error','Lỗi:'+response.errMsg);
+                }
+            });
+        }else{
+            Caydonvi.update({id: caydonvi.id},caydonvi,function(response){
+                //console.log(data);
+                $scope.pageChanged($scope.currentPage);
+                $scope.close();
+                if(angular.equals(response.errCode,0)){
+                    flash('Lưu thành công!');
+                }else{
+                    flash('error','Lỗi:'+response.errMsg);
+                }
+            });
+        }
+    }
+    $scope.add = function () {
+        $scope.caydonvi = {};
+        $scope.title = 'Thêm mới';
+        $scope.caydonvi.orders = 99;
+        $scope.caydonvi.status = "1";
+        $scope.shouldBeOpen = true;
+    };
+    $scope.edit = function (id) {
+        $scope.title = 'Hiệu chỉnh';
+        $scope.caydonvi = Caydonvi.get({id:id});
+        $scope.shouldBeOpen = true;
+    };
+    $scope.changeStatus = function (id,status) {
+        status = (status === '0')?1:0;
+        //console.log('changeStatus');
+        Caydonvi.update({id:id},{action:"changeStatus",status:status},function(response){
+            //console.log(data);
+            $scope.pageChanged($scope.currentPage);
+            $scope.close();
+            if(angular.equals(response.errCode,0)){
+                flash('Lưu thành công!');
+            }else{
+                flash('error','Lỗi:'+response.errMsg);
+            }
+        });
+    };
+    $scope.delete = function (id) {
+        Caydonvi.delete({id:id},function(response){
+            //console.log(data);
+            $scope.pageChanged($scope.currentPage);
+            if(angular.equals(response.errCode,0)){
+                flash('Lưu thành công!');
+            }else{
+                flash('error','Lỗi:'+response.errMsg);
+            }
+        });
+    };
+    $scope.close = function () {
+        $scope.shouldBeOpen = false;
+    };
+    // to chuc
+    $scope.modalSelectTochucclose = function () {
+        $scope.modalSelectTochuc = false;
+    };
+    $scope.selectTochuc = function (caydonvi_id,code_tochuc) {
+        $scope.mSelectTochuc = {};
+        $scope.mSelectTochuc.caydonvi_id = caydonvi_id;
+        $scope.mSelectTochuc.code_tochuc = code_tochuc;
+        //console.log(caydonvi_id,code_tochuc);
+        $scope.tochuc = new TochucPagination();
+        $scope.tochuc.state = 0;
+        $scope.modalSelectTochuc = true;
+    };
+    $scope.doSaveSelectTochuc = function (mSelectTochuc) {
+        //console.log(mSelectTochuc);
+        Caydonvi.update({id:mSelectTochuc.caydonvi_id},{action:"selectTochuc",code_tochuc:mSelectTochuc.code_tochuc},function(response){
+            //console.log(data);
+            $scope.pageChanged($scope.currentPage);
+            $scope.modalSelectTochucclose();
+            if(angular.equals(response.errCode,0)){
+                flash('Lưu thành công!');
+            }else{
+                flash('error','Lỗi:'+response.errMsg);
+            }
+        });
+
+    };
+    $scope.doSearchSelectTochuc = function(){
+        $scope.tochuc = new TochucPagination();
+        $scope.tochuc.state = 0;
+        $scope.tochuc.search =  $scope.mSelectTochuc.search;
+        $scope.tochuc.busy = false;
+        $scope.tochuc.page = 1;
+        $scope.tochuc.start = 0;
+        $scope.tochuc.nextPage();
+    }
+    $scope.doResetSelectTochuc = function(){
+        $scope.mSelectTochuc.search = '';
+        $scope.doSearchSelectTochuc();
+    }
+    // tao trang
+    $scope.filter_search = '';
+    $scope.pageChanged($scope.currentPage);
+}]);
+app.controller('TochucCtrl', ['$scope','$routeParams','$location','flash','Tochuc',function($scope,$routeParams,$location, flash, Tochuc) {
+    $scope.maxSize = 5;
+    $scope.currentPage = 1;
+    $scope.limitPage = Core.limitPage;
+    $scope.parents = [];
+    $scope.doSearch = function() {
+        $scope.pageChanged(1);
+    };
+    $scope.doReset = function() {
+        $scope.filter_search = '';
+        $scope.pageChanged(1);
+    };
+    $scope.pageChanged = function(page) {
+        var start = (page - 1)*$scope.limitPage;
+        Tochuc.query({page:page,limit:$scope.limitPage,start:start,search:$scope.filter_search,parent_id:$scope.parent_id},function(response){
+            $scope.items = response.data;
+            if($scope.limitPage == 0){
+                $scope.noOfPages = 0;
+            }else{
+                $scope.noOfPages =  Math.ceil(response.total / $scope.limitPage);
+            }
+        });
+    };
+    // console.log($scope.items);
+    $scope.save = function(caydonvi){
+        if(angular.equals(caydonvi.id,undefined)){
+            Caydonvi.create({},caydonvi,function(response){
+                //console.log(data);
+                $scope.pageChanged($scope.currentPage);
+                $scope.close();
+                if(angular.equals(response.errCode,0)){
+                    flash('Lưu thành công!');
+                }else{
+                    flash('error','Lỗi:'+response.errMsg);
+                }
+            });
+        }else{
+            Caydonvi.update({id: caydonvi.id},caydonvi,function(response){
+                //console.log(data);
+                $scope.pageChanged($scope.currentPage);
+                $scope.close();
+                if(angular.equals(response.errCode,0)){
+                    flash('Lưu thành công!');
+                }else{
+                    flash('error','Lỗi:'+response.errMsg);
+                }
+            });
+        }
+    }
+    $scope.add = function () {
+        $scope.tochuc = {};
+        $scope.title = 'Thêm mới';
+        $scope.caydonvi.orders = 99;
+        $scope.caydonvi.status = "1";
+        $scope.shouldBeOpen = true;
+    };
+    $scope.edit = function (id) {
+        $scope.title = 'Hiệu chỉnh';
+        $scope.tochuc = Tochuc.get({id:id});
+        $scope.shouldBeOpen = true;
+    };
+    $scope.changeStatus = function (id,status) {
+        status = (status === '0')?1:0;
+        //console.log('changeStatus');
+        Caydonvi.update({id:id},{action:"changeStatus",status:status},function(response){
+            //console.log(data);
+            $scope.pageChanged($scope.currentPage);
+            $scope.close();
+            if(angular.equals(response.errCode,0)){
+                flash('Lưu thành công!');
+            }else{
+                flash('error','Lỗi:'+response.errMsg);
+            }
+        });
+    };
+    $scope.delete = function (id) {
+        Caydonvi.delete({id:id},function(response){
+            //console.log(data);
+            $scope.pageChanged($scope.currentPage);
+            if(angular.equals(response.errCode,0)){
+                flash('Lưu thành công!');
+            }else{
+                flash('error','Lỗi:'+response.errMsg);
+            }
+        });
+    };
+    $scope.close = function () {
+        $scope.shouldBeOpen = false;
+    };
+    // tao trang
+    $scope.filter_search = '';
+    $scope.pageChanged($scope.currentPage);
+}]);
+app.controller('ModalSelectToChucCtrl', ['$scope','$routeParams','$location','$filter','flash','Tochuc','TochucLinhvuc','TochucPagination',function($scope,$routeParams,$location,$filter, flash, Tochuc, TochucLinhvuc, TochucPagination) {
+    
+}]);
+app.controller('ThanhlapCtrl', ['$scope','$routeParams','$location','$filter','flash','Tochuc','TochucLinhvuc','TochucPagination',function($scope,$routeParams,$location,$filter, flash, Tochuc, TochucLinhvuc, TochucPagination) {
+    $scope.submitted = false;
+    $scope.collectTochuc = [];
+    Tochuc.query({action:"getCollect"},function(response){
+        $scope.collectTochuc = response.data;
+    });
+    $scope.modalSelectTochuc = false;
+    $scope.linhvuc = {};
+    $scope.tochuc = {};
+    $scope.linhvuc_id = [];
+    $scope.tochuc.linhvuc_id = [];
+    $scope.tochuc.ngaythanhlap ='31/08/2013';
+
+   // $scope.linhvuc_id['02'] = "1";
+    // to chuc
+    $scope.open = function () {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: ModalSelectToChucCtrl,
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+    $scope.modalSelectTochucclose = function () {
+        $scope.modalSelectTochuc = false;
+    };
+    $scope.selectTochuc = function () {
+        $scope.mSelectTochuc = {};
+        //console.log(caydonvi_id,code_tochuc);
+        $scope.tochucPagination = new TochucPagination();
+        $scope.tochucPagination.state = 0;
+        $scope.modalSelectTochuc = true;
+    };
+    $scope.doSearchSelectTochuc = function(){
+        $scope.tochucPagination = new TochucPagination();
+        $scope.tochucPagination.state = 0;
+        $scope.tochucPagination.search =  $scope.mSelectTochuc.search;
+        $scope.tochucPagination.busy = false;
+        $scope.tochucPagination.page = 1;
+        $scope.tochucPagination.start = 0;
+        $scope.tochucPagination.nextPage();
+    }
+    $scope.doResetSelectTochuc = function(){
+        $scope.mSelectTochuc.search = '';
+        $scope.doSearchSelectTochuc();
+    }
+    $scope.doSaveSelectTochuc = function (mSelectTochuc) {
+        console.log(mSelectTochuc);
+
+        angular.forEach($filter('filter')($scope.tochucPagination.items, {code:mSelectTochuc.code_tochuc}), function(v) {
+            //$scope.image.categories.push(v.id);
+            //console.log(v.name, v.code);
+            $scope.tochuc.code_parent = v.code;
+            $scope.tochuc.coquanchuquan = v.name;
+           // return;
+        });
+        $scope.modalSelectTochucclose();
+        console.log($scope.tochuc);
+    };
+    TochucLinhvuc.query({action:"getCollect"},function(response){
+        $scope.linhvuc.children = response.data;
+    });
+    $scope.updateCheckbox = function(checked,code){
+        //console.log(checked,code);
+
+        if(checked == true){
+            $scope.tochuc.linhvuc_id.push(code);
+        }else{
+            $scope.tochuc.linhvuc_id.splice($scope.tochuc.linhvuc_id.indexOf(code), 1);
+        }
+    }
+    $scope.saveTochuc = function(){
+        $scope.submitted == true;
+       // $scope.tochuc.ngaythanhlap = $filter('date')(new Date($scope.tochuc.ngaythanhlap),'yyyy-MM-dd');
+        console.log($scope.tochuc.ngaythanhlap);
+        if ($scope.thanhlap_form.$valid) {
+            // Submit as normal
+            $scope.tochuc.ngaythanhlap = $filter('date')(new Date($scope.tochuc.ngaythanhlap),'yyyy-MM-dd');
+            Tochuc.create($scope.tochuc,function(response){
+                console.log(response);
+            });
+        } else {
+            $scope.thanhlap_form.submitted = true;
+        }
+    }
+}]);

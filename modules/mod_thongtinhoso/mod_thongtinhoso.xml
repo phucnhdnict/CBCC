@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" version="3.1" method="upgrade">
+	<name>Thông tin hồ sơ</name>
+	<author>DNICT</author>
+	<creationDate>23-08-2014</creationDate>
+	<copyright>Copyright (C) 2014 Dnict.vn</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>npbnguyen@gmail.com</authorEmail>
+	<authorUrl>www.dnict.vn</authorUrl>
+	<version>0.0.1</version>
+	<description>This module allows the displaying information of officer</description>
+	<files>
+		<filename module="mod_thongtinhoso">mod_thongtinhoso.php</filename>
+        <filename>mod_thongtinhoso.xml</filename>
+        <filename>helper.php</filename>
+	</files>
+</extension>

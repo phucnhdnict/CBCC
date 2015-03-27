@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset
+		name="serviceurl"
+		label="COM_CHAT_CONFIG_LABEL"
+		description="COM_CHAT_CONFIG_SERVICE_DESC">
+		<field
+ 			name="apiKey"
+ 			type="text"
+ 			default="w7xtc2ywfb"
+			label="COM_CHAT_APIKEY_LABEL"
+			description="COM_CHAT_APIKEY_DESC"
+		/>
+		<field
+ 			name="serviceUrl"
+ 			type="text"
+ 			default="http://localhost:3000"
+			label="COM_CHAT_URL_SERVICE_LABEL"
+			description="COM_CHAT_URL_SERVICE_DESC"
+		/>
+
+ 		
+
+	</fieldset>
+</config>

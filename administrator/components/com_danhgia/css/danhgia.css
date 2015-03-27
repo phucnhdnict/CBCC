@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+label.error, label.error {
+    color: red;
+    font-style: italic;
+}
+div.error {
+    display: none;
+}
+input {
+    border: 1px solid black;
+}
+input.checkbox {
+    border: medium none;
+}
+input:focus {
+    border: 1px dotted black;
+}
+input.error {
+    border: 1px dotted red;
+}

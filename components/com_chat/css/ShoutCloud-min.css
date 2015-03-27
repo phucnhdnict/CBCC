@@ -1,0 +1,122 @@
+/* Style Grouping */
+#ShoutCloud-InputBox div.ShoutCloud-Title,#ShoutCloud-Error,#ShoutCloud-Input-Wrapper,#ShoutCloud-BanListBox .ShoutCloud-BannedUser div.ShoutCloud-UnBan,#ShoutCloud-DoClear,.ShoutCloud-Swatches,div#ShoutCloud-Smilies-Menu{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}
+
+.ShoutCloud-Swatches,.ShoutCloud-Swatch,#ShoutCloud-MsgBox div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.shout-del,#ShoutCloud-MsgBox div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.ShoutCloud-Admin-Reply,#ShoutCloud-MsgBox div.shout-msg strong,div.shout-system-msg strong,#ShoutCloud-MsgBox div.ShoutCloud-Admin-User-Controls span.shout-ban-opts span.shout-ban{-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
+
+#ShoutCloud-InputBox,#ShoutCloud-Shout,#ShoutCloud-Admin-Login{-webkit-border-bottom-left-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-bottomright:5px;-moz-border-radius-bottomleft:5px;border-bottom-left-radius:5px;border-bottom-right-radius:5px}
+
+#ShoutCloud-MsgBox,#ShoutCloud-InputBox,#ShoutCloud-User,#ShoutCloud-Msg,#ShoutCloud-Pass{font:11px Tahoma, Geneva, sans-serif}
+
+/* ShoutCloud Containers */
+#ShoutCloud-MsgBox{position:relative;color:#000;display:block;height:400px;border:1px solid #cbdbe1;background-color:#FFF;-webkit-border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-radius-topleft:5px;-moz-border-radius-topright:5px;border-top-left-radius:5px;border-top-right-radius:5px;overflow:auto}
+
+#ShoutCloud-InputBox{color:#000;display:block;padding:5px;background-color:#cbdbe1;}
+
+/* ShoutCloud Inputs/Buttons */
+#ShoutCloud-Input-Wrapper{padding:3px;background-color:#e7f4fa;}
+
+#ShoutCloud-Input-Wrapper strong{color:#889ea8}
+
+#ShoutCloud-Input-Wrapper.margintop{margin-top:10px}
+
+#ShoutCloud-User,#ShoutCloud-Msg,#ShoutCloud-Pass{width:100%;padding:3px 0 3px 0;border:0;color:#889ea8;background-color:#e7f4fa;outline:none}
+
+#ShoutCloud-User:focus,#ShoutCloud-Msg:focus,#ShoutCloud-Pass:focus{color:#000;outline:none}
+
+#ShoutCloud-Msg{padding-top:6px;border-top:1px solid #bfd0d8;height: 30px;}
+
+#ShoutCloud-User{font-weight:bold;width:80%}
+
+#ShoutCloud-Shout,#ShoutCloud-Admin-Login{float:right;background-color:#8aa3af;border:0;cursor:pointer;padding:5px 10px 5px 10px;font-size:11px;font-weight:bold;color:#fff;margin-right:4px;margin-top:0}
+
+/* ShoutCloud Messages */
+#ShoutCloud-MsgBox div.shout-msg,div.shout-system-msg{display:block;position:relative;min-height:12px;line-height:150%;padding:8px;background-color:transparent;clear:both;word-wrap:break-word}
+
+#ShoutCloud-MsgBox div.shout-msg.shout-deleted{display:none}
+
+#ShoutCloud-MsgBox div.shout-msg:first-line ,div.shout-system-msg:first-line {line-height:200%}
+
+#ShoutCloud-MsgBox .shouteven{background-color:#e7f4fa !important}
+
+#ShoutCloud-MsgBox div.shout-msg strong.shout-admin{background:#670909 url(../imgs/admin-stripe.png) repeat;}
+
+#ShoutCloud-MsgBox div.shout-msg em{font-style:normal;font-size:9px;display:block;padding-left:4px;float:right;color:#a7bdc7}
+
+#ShoutCloud-MsgBox div.shout-msg b.reply{color:#09c}
+
+#ShoutCloud-MsgBox div.shout-system-msg{background-color:#cbdbe1}
+
+#ShoutCloud-MsgBox div.shout-system-msg strong{background-color:#66accc}
+
+#ShoutCloud-MsgBox div.shout-system-msg span.title{display:block;width:70px;float:left;padding:5px;margin-top:4px;background-color:#8aa3af;color:#FFF;font-weight:bold;-webkit-border-top-left-radius:5px;-webkit-border-bottom-left-radius:5px;-moz-border-radius-topleft:5px;-moz-border-radius-bottomright:5px;border-top-left-radius:5px;border-bottom-left-radius:5px}
+
+#ShoutCloud-MsgBox div.shout-system-msg span.contents{display:block;float:left;padding:5px;margin-top:4px;background-color:#e7f4fa;-webkit-border-top-right-radius:5px;-webkit-border-bottom-right-radius:5px;-moz-border-radius-topright:5px;-moz-border-radius-bottomleft:5px;border-top-right-radius:5px;border-bottom-right-radius:5px}
+
+#ShoutCloud-MsgBox div.shout-msg strong,div.shout-system-msg strong{padding:5px;margin-right:5px;background-color:#094b67;color:#FFF;cursor:pointer}
+
+/* ShoutCloud Admin */
+#ShoutCloud-Admin-Panel{display:block;margin-left:5px}
+
+#ShoutCloud-Admin-Panel span.admin-btn{display:block;float:left;background-color:#c33;color:#FFF;font-weight:bold;font-size:10px;padding:2px 5px 2px 5px;margin-right:5px;-webkit-border-bottom-left-radius:3px;-webkit-border-bottom-right-radius:3px;-moz-border-radius-bottomright:3px;-moz-border-radius-bottomleft:3px;border-bottom-left-radius:3px;border-bottom-right-radius:3px;cursor:pointer}
+
+#ShoutCloud-Admin-Panel span.admin-btn.shout-on{background-color:#cbdbe1;color:#094b67;cursor:default}
+
+div.ShoutCloud-Admin-User-Controls{display:none;position:absolute;padding-right:4px;padding-left:4px;top:0;bottom:0;left:0;right:0;background-color:rgba(0,0,0,0.8);font-size:10px;color:#FFF}
+
+div.ShoutCloud-Admin-User-Controls span.shout-user-ip{display:block;float:right;font-size:10px;color:#ccc}
+
+div.ShoutCloud-Admin-User-Controls span.shout-user-opts{display:block;float:right;color:#fff;clear:right}
+
+div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.shout-del,div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.ShoutCloud-Admin-Reply{display:inline;padding:3px;filter:alpha(opacity=60);opacity:.6;cursor:pointer}
+
+div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.shout-del:hover,div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.ShoutCloud-Admin-Reply:hover{filter:alpha(opacity=100);opacity:1}
+
+div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.shout-del{background-color:#C33;margin-right:3px;color:#FFF}
+
+div.ShoutCloud-Admin-User-Controls span.shout-user-opts span.ShoutCloud-Admin-Reply{background-color:#e7f4fa;color:#000}
+
+div.ShoutCloud-Admin-User-Controls span.shout-ban-opts b{display:block;color:#fff;clear:left}
+
+div.ShoutCloud-Admin-User-Controls span.shout-ban-opts span.shout-ban{display:block;float:left;background-color:#c33;color:#fff;padding:1px 2px 1px 2px;margin-right:3px;filter:alpha(opacity=60);opacity:.6;cursor:pointer}
+
+div.ShoutCloud-Admin-User-Controls span.shout-ban-opts span.shout-ban:hover{filter:alpha(opacity=100);opacity:1}
+
+#ShoutCloud-BanListBox{display:block;max-height:150px;overflow:auto}
+
+#ShoutCloud-BanListBox .ShoutCloud-BannedUser{display:block;background-color:transparent;padding:5px}
+
+#ShoutCloud-BanListBox .ShoutCloud-BannedUser div.ShoutCloud-UnBan{display:block;float:right;background-color:#c33;color:#FFF;font-weight:bold;padding:5px;cursor:pointer}
+
+#ShoutCloud-BanListBox .ShoutCloud-BannedUser:nth-child(even){background-color:#e7f4fa}
+
+#ShoutCloud-DoClear{display:block;width:150px;background-color:#c33;color:#FFF;font-weight:bold;text-align:center;padding:5px;cursor:pointer;margin:0 auto;margin-top:10px;margin-bottom:10px}
+
+/* ShoutCloud Smilies/Color Swatches */
+div#ShoutCloud-Smilies-Menu{display:block;padding:4px;margin-top:3px;margin-bottom:4px;text-align:center;background-color:#e7f4fa;}
+
+img.ShoutCloud-Smilie{width:16px;height:16px;margin-right:5px;cursor:pointer}
+
+#ShoutCloud-Color{display:block;float:right;width:16px;height:16px;margin-top:4px;background:url(../imgs/choose-color.png) no-repeat;cursor:pointer}
+
+.ShoutCloud-Swatches{display:none;height:18px;padding:4px;margin-top:3px;margin-bottom:4px;background-color:#e7f4fa;}
+
+.ShoutCloud-Swatch{display:block;width:16px;height:16px;float:left;margin-right:5px;border:1px solid transparent;cursor:pointer}
+
+.ShoutCloud-Swatch.sel{border:1px solid #fff;-webkit-box-shadow:0 0 3px #000;-moz-box-shadow:0 0 3px #000;box-shadow:0 0 3px #000}
+
+.ShoutCloud-Swatch-Pink{background-color:#d700a2!important}  .ShoutCloud-Swatch-Purple{background-color:#710599!important}  .ShoutCloud-Swatch-Blue{background-color:#1841da!important}
+.ShoutCloud-Swatch-LightBlue{background-color:#489ee7!important}  .ShoutCloud-Swatch-Teal{background-color:#2ec9db!important}  .ShoutCloud-Swatch-Green{background-color:#0d9041!important}
+.ShoutCloud-Swatch-DarkGreen{background-color:#025100!important}  .ShoutCloud-Swatch-Lime{background-color:#a3c51a!important}  .ShoutCloud-Swatch-Yellow{background-color:#e1aa17!important}
+.ShoutCloud-Swatch-Orange{background-color:#e87005!important}  .ShoutCloud-Swatch-Red{background-color:#e80505!important}  .ShoutCloud-Swatch-Default{background-color:#094b67!important}
+
+/* ShoutCloud Errors */
+#ShoutCloud-Error{display:none;padding:10px;margin-bottom:5px;background-color:#d77777;border:1px solid #9b4545;color:#FFF;}
+
+#ShoutCloud-Error strong{display:block;margin-bottom:3px;padding-bottom:3px;border-bottom:1px solid #9b4545;font-size:12px}
+
+/* ShoutCloud Misc Styles */
+#ShoutCloud-Counter{display:inline;float:left;padding-top:8px;font-size:10px}
+
+#ShoutCloud-InputBox div.ShoutCloud-Title{display:block;padding:5px;margin-bottom:5px;font-size:12px;font-weight:bold;background-color:#094b67;color:#fff;}
+
+.clear{clear:both}

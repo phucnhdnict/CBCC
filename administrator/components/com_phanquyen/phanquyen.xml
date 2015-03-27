@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1.5" method="upgrade">
+
+	<name>com_phanquyen</name>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>October 2013</creationDate>
+	<author>DNICT</author>
+	<authorEmail>thinhlehuuqt87@gmail.com</authorEmail>
+	<authorUrl></authorUrl>
+	<copyright>Copyright © 2013 - All rights reserved.</copyright>
+	<license>GNU/GPL</license>
+	<!-- The version string is recorded in the components table -->
+	<version>2.0</version>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update> <!-- Runs on update; New in 1.6 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<administration>
+		<menu img="components/com_phanquyen/images/jshop_logo_s.png">Phân quyền</menu>
+		<submenu>
+			<menu link="option=com_phanquyen&amp;controller=action">Action</menu>
+			<menu link="option=com_phanquyen&amp;controller=module">Module</menu>
+			<menu link="option=com_phanquyen&amp;controller=group">Group</menu>
+			<menu link="option=com_phanquyen&amp;controller=user">User</menu>
+
+		</submenu>
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder to 
+			copy FROM in the package to install therefore files copied in this section 
+			are copied from /admin/ in the package -->
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>phanquyen.php</filename>
+			<filename>controller.php</filename>
+
+			<!-- SQL files section -->
+			<!-- models files section -->
+			<folder>models</folder>
+			<!-- views files section -->
+			<folder>views</folder>
+			<!-- controllers files section -->
+			<folder>controllers</folder>
+			<folder>sql</folder>
+		</files>
+
+	</administration>
+
+</extension>

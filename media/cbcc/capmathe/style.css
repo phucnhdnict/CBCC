@@ -1,0 +1,144 @@
+@charset "utf-8";
+/* CSS Document */
+img{margin:0; padding:0}
+.background{
+	width:9cm; 
+	height:5.4cm; 
+	border:solid 1px #000; 
+	border-radius: 8px; 
+	padding:2px; 
+	font-family: Arial, Helvetica, sans-serif; 
+	float:left
+}
+.background h3, .background h4, .background h5{margin:0; padding:0}
+.header{
+	width:8.9cm;
+	border:solid 2px #0066cc; 
+	border-radius:5px 5px 0 0; 
+	height:1.8cm; 
+	background: url(bg_bienche.png) no-repeat center top;
+}
+.header_hopdong{
+	width:8.9cm;
+	border:solid 2px #0066cc; 
+	border-radius:5px 5px 0 0; 
+	height:1.8cm; 
+	background: url(bg_hopdong.png) no-repeat center top;
+}
+.card-logo{
+	padding-left: 5px;
+	padding-top: 4px;
+	float:left; 
+	width:60px;
+}
+.logo-content{
+	text-transform:uppercase; 
+	font-size:13.78pt; 
+	font-family:"Times New Roman", Times, serif; 
+	font-weight:bold; 
+	text-align:center;
+	color: #fffc00;	
+	margin-left:55px;
+	margin-top: 12px;
+	line-height: 20px;
+	white-space:nowrap;
+}
+.logo-content-donvi{
+	text-transform:uppercase; 
+	font-size:13.78pt; 
+	font-family:"Times New Roman", Times, serif; 
+	font-weight:bold; 
+	text-align:center;
+	color: #fffc00;	
+	margin-left:70px;
+	margin-top: 2px;
+	white-space:nowrap;
+}
+.content{ 
+	height:3.47cm;
+	margin:0; 
+	padding:0; 
+	border:solid 2px #0066cc;
+	border-top: none; 
+	border-radius: 0 0 5px 5px;
+}
+.card-image{
+	width:2cm;
+	height:2.8cm;
+	padding:13px 10px; 
+	border-right:solid 2px #0066cc; 
+	float:left;
+}
+.card-content{
+	padding:9px 0 0 4px;
+	background:url(bg1.png) no-repeat center center;
+	margin-left:2.6cm;
+
+}
+.card-detail{height:2.4cm;}
+h3.card-name{
+	font-size:14pt; 
+	text-transform:uppercase;  
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold; 
+	line-height:30px; 
+	white-space:nowrap;
+}
+.card-name{
+	font-size:14pt; 
+	text-transform:uppercase;  
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold; 
+	text-align:center;
+	line-height:30px; 
+	white-space:nowrap;
+}
+h3.card-position{
+	font-size:13pt; 
+	text-transform:uppercase;  
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold; 
+	line-height:30px; 
+	white-space:nowrap;
+}
+.card-position{
+	font-size:13.5pt; 
+	text-transform:uppercase;  
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold; 
+	line-height:20px; 
+	text-align:center; 
+	white-space:nowrap;
+}
+.card-position1{
+	font-size:11pt; 
+	text-transform:uppercase;  
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold; 
+	line-height:18px; 
+	text-align:center; 
+	white-space:nowrap;
+}
+h3.card-ecode{
+	font-size:13.5pt; 
+	text-transform:uppercase;  
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold; 
+	line-height:30px; 
+	white-space:nowrap;
+		margin-bottom: 2px;
+	color: red;
+}
+.background h5{
+	text-transform:uppercase; 
+	color:#1c5394; 
+	font-size:10.5pt; 
+	font-weight:300; 
+	line-height:21px; 
+	white-space:nowrap;
+}
+.card-check{
+	margin-top: 4px;
+   	margin-bottom: 2px;
+	text-align:center; 
+}

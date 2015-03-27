@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>com_dmttcn</name>
+	<author>Joomla! Project</author>
+	<creationDate>December 2013</creationDate>
+	<copyright>(C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>3.0.0</version>
+	<description>Thong tin ca nhan</description>
+  
+  <administration>
+    <!-- Administration Menu Section -->
+    <menu>COM_DMTTCN</menu>
+    <submenu>
+      <!-- Note that all & must be escaped to &amp; for the file to be valid XML and be parsed by the installer -->
+      <menu link="option=com_dmttcn&amp;controller=hangtbinh">COM_DMTTCN_HANGTBINH</menu>
+	  <menu link="option=com_dmttcn&amp;controller=suckhoe">COM_DMTTCN_SUCKHOE</menu>
+	  <menu link="option=com_dmttcn&amp;controller=nhommau">COM_DMTTCN_NHOMMAU</menu>
+	  <menu link="option=com_dmttcn&amp;controller=tthonnhan">COM_DMTTCN_TTHONNHAN</menu>
+      <menu link="option=com_dmttcn&amp;controller=gioitinh">COM_DMTTCN_GIOITINH</menu>
+	  <menu link="option=com_dmttcn&amp;controller=dantoc">COM_DMTTCN_DANTOC</menu>
+	  <menu link="option=com_dmttcn&amp;controller=tongiao">COM_DMTTCN_TONGIAO</menu>
+	  <menu link="option=com_dmttcn&amp;controller=tpxuatthan">COM_DMTTCN_TPXUATTHAN</menu>
+	  <menu link="option=com_dmttcn&amp;controller=dthuongcs">COM_DMTTCN_DTHUONGCS</menu>
+	  <menu link="option=com_dmttcn&amp;controller=dhphongtang">COM_DMTTCN_DHPHONGTANG</menu>
+	  <menu link="option=com_dmttcn&amp;controller=qhgiadinh">COM_DMTTCN_QHGIADINH</menu>
+	  <menu link="option=com_dmttcn&amp;controller=ktkl">COM_DMTTCN_KTKL</menu>
+	  <menu link="option=com_dmttcn&amp;controller=khuyettat">COM_DMTTCN_KHUYETTAT</menu>
+	  <menu link="option=com_dmttcn&amp;controller=nhiemkydb">COM_DMTTCN_NHIEMKYDB</menu>
+	  <menu link="option=com_dmttcn&amp;controller=daibieu">COM_DMTTCN_DAIBIEU</menu>
+	  <menu link="option=com_dmttcn&amp;controller=tinhthanh">COM_DMTTCN_TINHTHANH</menu>
+	  <menu link="option=com_dmttcn&amp;controller=quanhuyen">COM_DMTTCN_QUANHUYEN</menu>
+	  <menu link="option=com_dmttcn&amp;controller=phuongxa">COM_DMTTCN_PHUONGXA</menu>
+    </submenu>
+    
+    <files folder="admin">
+      <filename>index.html</filename>
+      <filename>dmttcn.php</filename>
+      <!-- install controllers -->
+      <folder>controllers</folder>
+      <folder>language</folder>
+      <folder>models</folder>
+	  <folder>tables</folder>  
+	  <folder>views</folder> 
+	  <folder>helpers</folder>
+    </files>  
+    <languages folder="admin">		
+		<language tag="vi-VN">language/vi-VN/vi-VN.com_dmttcn.sys.ini</language>
+		<language tag="vi-VN">language/vi-VN/vi-VN.com_dmttcn.ini</language>
+	</languages>
+  </administration>
+</extension>

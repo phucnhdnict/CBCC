@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+  <name>com_baocao</name>
+  <!-- The following elements are optional and free of formatting conttraints -->
+  <creationDate>February 2013</creationDate>
+  <author>Lê Hữu Thịnh</author>
+  <authorEmail>thinhlh@danang.gov.vn</authorEmail>
+  <license>GNU/GPL</license>
+  <!--  The version string is recorded in the components table -->
+  <version>3.1</version>
+  <!-- The description is optional and defaults to the name -->
+  <description>
+  </description>
+	<files folder="site">
+		<!-- install controllers -->
+      <filename>controller.php</filename>
+	  <!-- install model - one for all -->
+      <filename>baocao.php</filename>
+	  <folder>controllers</folder>
+      <!-- install model - one for all -->
+      <folder>models</folder>
+	  <!-- install views -->
+	  <folder>views</folder>
+	  <folder>css</folder>
+	  <folder>js</folder>
+	  <folder>images</folder>
+	  
+	</files>
+  
+  <administration>
+    <!-- Administration Menu Section -->
+    <menu >Báo cáo chất lượng cán bộ công chức, viên chức</menu>
+    <submenu>
+      <!-- Note that all & must be escaped to &amp; for the file to be valid XML and be parsed by the installer -->
+     
+	  <menu link="option=com_baocao&amp;controller=baocao">Báo cáo chất lượng công chức</menu>
+	  <menu link="option=com_baocao&amp;controller=baocaovc">Báo cáo chất lượng viên chức</menu>
+	 
+    </submenu>
+    <!-- Administration Main File Copy Section -->
+    <!-- Note the folder attribute: This attribute describes the folder    to copy FROM in the package to install therefore files copied    in this section are copied from /admin/ in the package -->
+	<files folder="admin">
+		<folder>controllers</folder>
+		<folder>models</folder>
+	</files>
+   </administration>
+</extension>

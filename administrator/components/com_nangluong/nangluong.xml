@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+  <name>com_nangluong</name>
+  <!-- The following elements are optional and free of formatting conttraints -->
+  <creationDate>February 2014</creationDate>
+  <author>Lê Hữu Thịnh</author>
+  <authorEmail>thinhlh@danang.gov.vn</authorEmail>
+  <license>GNU/GPL</license>
+  <!--  The version string is recorded in the components table -->
+  <version>3.1</version>
+  <!-- The description is optional and defaults to the name -->
+  <description>
+  </description>
+	 <files folder="site">
+			<filename>nangluong.php</filename>
+			<filename>index.html</filename>
+			<folder>models</folder>
+			<folder>views</folder>
+			<folder>controllers</folder>
+			<folder>js</folder>
+			<folder>css</folder>
+			<folder>images</folder>
+			
+        </files>
+		<administration>           
+                <files folder="admin">
+					<filename>nangluong.php</filename>
+				</files>
+				
+        </administration>			
+</extension>

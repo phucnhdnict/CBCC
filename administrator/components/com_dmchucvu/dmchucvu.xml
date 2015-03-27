@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>com_dmchucvu</name>
+	<author>Joomla! Project</author>
+	<creationDate>April 2006</creationDate>
+	<copyright>(C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>3.0.0</version>
+	<description>Danh muc Chuc vu</description>
+<administration>
+    <!-- Administration Menu Section -->
+    <menu img="class:chucvu" alt="Danh mục Chức vụ">COM_DMCHUCVU</menu>
+    <submenu>
+      <!-- Note that all & must be escaped to &amp; for the file to be valid XML and be parsed by the installer -->
+      <menu img="class:chucvu" link="option=com_dmchucvu&amp;controller=chucvudang">COM_DMCHUCVU_CHUCVUDANG</menu>
+	  <menu img="class:chucvu" link="option=com_dmchucvu&amp;controller=chucvudoan">COM_DMCHUCVU_CHUCVUDOAN</menu>
+	  <menu img="class:chucvu" link="option=com_dmchucvu&amp;controller=chucvuquandoi">COM_DMCHUCVU_CHUCVUQUANDOI</menu>
+	  <menu img="class:chucvu" link="option=com_dmchucvu&amp;controller=chucvuquandoi">COM_DMCHUCVU_CAPBACQUANDOI</menu>
+    </submenu>
+    <files folder="admin">
+      <filename>dmchucvu.php</filename>    
+      <!-- install controllers -->
+	  <folder>controllers</folder>
+	  <folder>models</folder>
+	  <folder>tables</folder>
+	  <folder>views</folder>
+	  <folder>helpers</folder>	
+    </files>
+	<languages folder="admin">		
+		<language tag="en-GB">language/en-GB.com_dmchucvu.ini</language>
+		<language tag="vi-VN">language/vi-VN.com_dmchucvu.ini</language>
+	</languages>
+  </administration>
+</extension>

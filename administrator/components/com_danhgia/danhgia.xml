@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>danhgia</name>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>18 06 2012</creationDate>
+	<author>Dnict</author>
+	<authorEmail>npbnguyen@gmail.com</authorEmail>
+	<authorUrl>http://dnict.vn</authorUrl>
+	<copyright>Copyright @2012</copyright>
+	<license>License Info</license>
+	<!--  The version string is recorded in the components table -->
+	<version>1.1.0</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>Đánh giá cán bộ công chức, viên chức</description>
+	<files folder="site">
+		<folder>controllers</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>lib</folder>
+		<folder>models</folder>		
+		<folder>views</folder>
+		<filename>danhgia.php</filename>
+		<filename>controller.php</filename>		
+		<filename>index.html</filename>
+	</files>
+	<administration>
+	<files folder="admin">
+		<folder>controllers</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>css</folder>		
+		<folder>lib</folder>		
+		<folder>models</folder>		
+		<folder>tables</folder>		
+		<folder>views</folder>
+		<filename>danhgia.php</filename>
+		<filename>controller.php</filename>		
+		<filename>index.html</filename>
+	</files>
+	</administration>
+</extension>

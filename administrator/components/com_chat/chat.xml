@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>com_chat</name>
+	<author>Joomla! Project</author>
+	<creationDate>April 2006</creationDate>
+	<copyright>(C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>3.0.0</version>
+	<description>CHAT CBCC</description>	   
+    <files folder="site">
+      <filename>index.html</filename>
+      <filename>chat.php</filename>    
+      <!-- install controllers -->
+	  <folder>controllers</folder>
+	  <folder>models</folder>	
+	  <folder>views</folder>
+	  <folder>helpers</folder>
+	  <folder>images</folder>
+	  <folder>css</folder>
+	  <folder>js</folder>	 
+    </files>
+	<languages folder="site">		
+		<language tag="en-GB">language/en-GB.com_chat.ini</language>
+		<language tag="vi-VN">language/vi-VN.com_chat.ini</language>
+	</languages>  
+	<administration>
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>config.xml</filename>
+		</files>
+		<languages folder="admin">		
+			<language tag="en-GB">language/en-GB.com_chat.ini</language>
+			<language tag="vi-VN">language/vi-VN.com_chat.ini</language>
+		</languages> 
+	</administration>
+</extension>

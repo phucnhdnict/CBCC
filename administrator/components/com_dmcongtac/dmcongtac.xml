@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>com_dmcongtac</name>
+	<author>Joomla! Project</author>
+	<creationDate>April 2006</creationDate>
+	<copyright>(C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>3.0.0</version>
+	<description>Danh muc cong tac</description>
+<administration>
+    <!-- Administration Menu Section -->
+    <menu img="class:linhvuc" alt="Danh mục Công tác">com_dmcongtac</menu>
+    <submenu>
+      <!-- Note that all & must be escaped to &amp; for the file to be valid XML and be parsed by the installer -->
+      <menu link="option=com_dmcongtac&amp;controller=linhvuc" img="class:linhvuc" alt="Công tác/Lĩnh vực">com_dmcongtac_linhvuc</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=khoicq" img="class:linhvuc" alt="Công tác/Khối cơ quan">com_dmcongtac_khoicq</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=httuyendung" img="class:linhvuc" alt="Công tác/Hình thức tuyển dụng">com_dmcongtac_httuyendung</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=binhbaudv" img="class:linhvuc" alt="Công tác/Bình bầu đơn vị">com_dmcongtac_binhbaudv</menu>
+      <menu link="option=com_dmcongtac&amp;controller=vitrituyendung" img="class:linhvuc" alt="Công tác/Vị trí tuyển dụng">com_dmcongtac_vitrituyendung</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=dtql" img="class:linhvuc" alt="Công tác/Đối tượng quản lý">com_dmcongtac_dtql</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=tthoso" img="class:linhvuc" alt="Công tác/Trạng thái hồ sơ">com_dmcongtac_tthoso</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=htnghihuu" img="class:linhvuc" alt="Công tác/Hình thức nghỉ hưu">com_dmcongtac_htnghihuu</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=ttdonvi" img="class:linhvuc" alt="Công tác/Trạng thái đơn vị">com_dmcongtac_ttdonvi</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=nguontd" img="class:linhvuc" alt="Công tác/Nguồn tuyển dụng">com_dmcongtac_nguontd</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=cvchuyenmon" img="class:linhvuc" alt="Công tác/Công việc chuyên môn">com_dmcongtac_cvchuyenmon</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=nlsotruong" img="class:linhvuc" alt="Công tác/Năng lực sở trường">com_dmcongtac_nlsotruong</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=bbcbcc" img="class:linhvuc" alt="Công tác/Bình bầu, phân loại CBCC">com_dmcongtac_bbcbcc</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=pldvsunghiep" img="class:linhvuc" alt="Công tác/Phân loại đơn vị sự nghiệp">com_dmcongtac_pldvsunghiep</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=loaiquyetdinh" img="class:linhvuc" alt="Công tác/Các loại quyết định">com_dmcongtac_loaiquyetdinh</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=lydonuocngoai" img="class:linhvuc" alt="Công tác/Lý do đi nước ngoài">com_dmcongtac_lydonuocngoai</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=hinhthucbienche" img="class:linhvuc" alt="Công tác/Hình thức biên chế">com_dmcongtac_hinhthucbienche</menu>
+	  <menu link="option=com_dmcongtac&amp;controller=thoihanbienchehopdong" img="class:linhvuc" alt="Công tác/Thời hạn biên chế hợp đồng">com_dmcongtac_thoihanbienchehopdong</menu>
+    </submenu>
+    <files folder="admin">
+      <filename>index.html</filename>
+      <filename>dmcongtac.php</filename>    
+      <!-- install controllers -->
+	  <folder>controllers</folder>
+	  <folder>models</folder>
+	  <folder>tables</folder>
+	  <folder>views</folder>
+	  <folder>helpers</folder>
+	  <folder>images</folder>
+    </files>
+	<languages folder="admin">		
+		<language tag="en-GB">language/en-GB.com_dmcongtac.ini</language>
+		<language tag="vi-VN">language/vi-VN.com_dmcongtac.ini</language>
+	</languages>
+  </administration>
+</extension>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>dmluong</name>
+	<author>Joomla! Project</author>
+	<creationDate>April 2006</creationDate>
+	<copyright>(C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>admin@joomla.org</authorEmail>
+	<authorUrl>www.joomla.org</authorUrl>
+	<version>3.0.0</version>
+	<description>Danh muc Luong</description>
+<administration>
+    <!-- Administration Menu Section -->
+    <menu img="class:luong" alt="Danh mục lương">COM_DMLUONG</menu>
+    <submenu>
+		<menu img="class:luong" link="option=com_dmluong&amp;controller=htnangluong">COM_DMLUONG_HTNANGLUONG</menu>
+		<menu img="class:luong" link="option=com_dmluong&amp;controller=loaiphucap">COM_DMLUONG_LOAIPHUCAP</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=httinhloaiphucap">COM_DMLUONG_HTTINHLOAIPHUCAP</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=luongdonvitra">COM_DMLUONG_LUONGDONVITRA</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=hthuongTNVK">COM_DMLUONG_HTHUONGTNVK</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=thuetncn">COM_DMLUONG_THUETNCN</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=mucluongCB">COM_DMLUONG_MUCLUONGCB</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=ngachchucdanh">COM_DMLUONG_NGACHCHUCDANH</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=nhomngach">COM_DMLUONG_NHOMNGACH</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=ngach">COM_DMLUONG_NGACH</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=ngachbac">COM_DMLUONG_NGACHBAC</menu>
+	  <menu img="class:luong" link="option=com_dmluong&amp;controller=bangluong">COM_DMLUONG_BANGLUONG</menu>
+    </submenu>
+    <!-- Administration Main File Copy Section -->
+    <!-- Note the folder attribute: This attribute describes the folder    to copy FROM in the package to install therefore files copied    in this section are copied from /admin/ in the package -->
+    <files folder="admin">
+      <filename>dmluong.php</filename>    
+      <!-- install controllers -->
+	  <folder>controllers</folder>
+	  <folder>models</folder>
+	  <folder>tables</folder>
+	  <folder>views</folder>
+	  <folder>helpers</folder>	
+    </files>
+	<languages folder="admin">		
+		<language tag="en-GB">language/en-GB.com_dmluong.ini</language>
+		<language tag="vi-VN">language/vi-VN.com_dmluong.ini</language>
+	</languages>
+  </administration>
+</extension>

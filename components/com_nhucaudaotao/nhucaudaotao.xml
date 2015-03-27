@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>com_nhucaudaotao</name>
+      <creationDate>Jan 2015</creationDate>
+      <author>DNICT</author>
+      <authorEmail>phucnh.dn.vn@gmail.com</authorEmail>
+      <authorUrl></authorUrl>
+      <copyright>Copyright © 2014 - All rights reserved.</copyright>
+      <license>GNU/GPL</license>
+      <!--  The version string is recorded in the components table -->
+      <version>3.0</version>
+      <description>Nhu cau dao tao</description>
+    <files folder="site">
+      <filename>nhucaudaotao.php</filename>
+      <filename>index.html</filename>
+      <!-- install controllers -->
+	  <folder>controllers</folder>
+	  <folder>js</folder>
+	  <folder>models</folder>
+	  <folder>views</folder>
+	  <folder>helpers</folder>	
+    </files>
+    <administration>
+	    <files folder="admin">
+	    </files>
+    </administration>
+</extension>
