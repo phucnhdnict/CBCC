@@ -424,6 +424,7 @@ jQuery(document).ready(function($){
 			"per_residence": { required : true },
 			"comm_placebirth": { required : true },
 			"married_fk": { required : true },
+
 			
 			"bienche_hinhthuc_id": { required : true },
 			"id_hinhthuctuyendung": { required : true },
