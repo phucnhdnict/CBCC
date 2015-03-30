@@ -35,6 +35,14 @@ defined( '_JEXEC' ) or die( 'Truy cập không hợp lệ' );
 <!-- Modal -->
 <div id="div_xemchitiet"></div>
 <script type="text/javascript">
+var dp = function(){
+	jQuery('.date-picker').datepicker({format: 'dd/mm/yyyy', "autoclose":true});
+	jQuery('.datepicker').css('zIndex', 999999);
+};
+var cs = function(){
+	jQuery('.chosen').chosen();
+	jQuery('.chosen-container').css('width', '100%');
+}
 var refresh = function() {
 	jQuery.blockUI();
 	jQuery.ajax({
@@ -205,12 +213,12 @@ jQuery(document).ready(function($){
 	$("#main-content-tree").jstree({
 		   "plugins" : ["themes","json_data","types","ui","cookies"],
 		   "json_data" : {
-		  "data" : [{ "attr" : { "id" : "<?php echo $this->root_info['root_id'];?>"},
-		     "state" : "closed",
-		     "data" : {
-		       "title" : "<?php echo $this->root_info['root_name'];?>",
-		       "attr" : { "href" : "#" }
-		      }
+		  		"data" : [{ "attr" : { "id" : "<?php echo $this->root_info['root_id'];?>"},
+		     	"state" : "closed",
+		     	"data" : {
+		       	"title" : "<?php echo $this->root_info['root_name'];?>",
+		       	"attr" : { "href" : "#" }
+		   		}
 		  }],
 		  "ajax" : {
 		   "url" : "<?php echo JURI::base(true);?>/index.php",
@@ -253,10 +261,10 @@ jQuery(document).ready(function($){
 			id = data.rslt.obj.attr("id").replace("node_","");
 			type = data.rslt.obj.attr('rel');
 			type = data.rslt.obj.attr('rel');
-			if(type == "file" || type == "folder")
+			if(type == "file" || type == "folder" || type == undefined)
 				refresh();				
 			else{
-				data.inst.toggle_node(data.rslt.obj);
+				data.inst.toggle_node(data.rslt.obj)	;
 			}
 		 });
 	$('#btn_import_fileupload').on('click',function(){
@@ -335,7 +343,7 @@ jQuery(document).ready(function($){
 			success:function(data){
 				$('#div_dist_placebirth').html(data);
 				$('#div_comm_placebirth').html('<select id="comm_placebirth" class="chosen" name="comm_placebirth"><option value="">--Chọn phường/xã--</option></select>');
-				$('.chosen').chosen();
+				cs();
 			}
 		});
 	});
@@ -348,11 +356,10 @@ jQuery(document).ready(function($){
   			data: {dist_placebirth:dist_placebirth},
   			success:function(data){
 	  			$('#div_comm_placebirth').html(data);
-	  			$('.chosen').chosen();
+	  			cs();
   			}
         });
 	});
-	$('.date-picker').datepicker({format: 'dd/mm/yyyy', "autoclose":true});
-	$('.datepicker').css('zIndex', 999999);
+	dp();
 });
 </script>

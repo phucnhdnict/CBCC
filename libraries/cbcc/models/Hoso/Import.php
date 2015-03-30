@@ -499,7 +499,7 @@ class Hoso_Model_Import extends JModelLegacy {
 	 * @param string $id
 	 * @return string
 	 */
-	public function getCbo($table,$field,$where,$order,$text,$code,$name,$selected=null,$idname=null,$class=null,$attrName=null,$attrAtt=null){
+	public function getCbo($table,$field,$where,$order,$text,$code,$name,$selected=null,$idname=null,$class=null,$attrArray=null){
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query	->select(array($field))
@@ -511,10 +511,16 @@ class Hoso_Model_Import extends JModelLegacy {
 		$data=array();
 		array_push($data, array('value','text' => $text));
 		for($i=0;$i<count($tmp);$i++){
-			if ($attrAtt==null and $attrName==null)
+			$attr=array();
+			if(isset($attrArray) && is_array($attrArray))
+				foreach ($attrArray as $k=>$v){
+					$attr+=array($k=>$tmp[$i]->$v);
+				}
+			if (!isset($attr) && !is_array($attr))
 				array_push($data, array('value' => $tmp[$i]->$code,'text' => $tmp[$i]->$name));
-			else 
-				array_push($data, array('value' => $tmp[$i]->$code,'text' => $tmp[$i]->$name,'attr'=>array($attrName=> $tmp[$i]->$attrAtt)));
+			else {
+				array_push($data, array('value' => $tmp[$i]->$code,'text' => $tmp[$i]->$name,'attr'=>$attr));
+			}
 		}
 		$options = array(
 				'id' => $idname,

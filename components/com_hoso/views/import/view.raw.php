@@ -175,10 +175,10 @@ class HososViewImport extends JViewLegacy {
  		$bienche_hinhthuc_id	=	$post['bienche_hinhthuc_id'];
  		$hinhthuctuyendung_selected	=	$post['selected'];
  		echo $model->getcbo('bc_hinhthuctuyendung a, bc_hinhthuc_hinhthuctuyendung b, bc_hinhthuc c',
-									'a.code, a.name',' a.id= b.hinhthuctuyendung_id and b.hinhthuc_id=c.id and a.`status`=1 and c.id='.$bienche_hinhthuc_id,
+									'a.id, a.name',' a.id= b.hinhthuctuyendung_id and b.hinhthuc_id=c.id and a.`status`=1 and c.id='.$bienche_hinhthuc_id,
 									'a.name asc',
 									'--Chọn Hình thức tuyển dụng--',
-									'code', 'name', $hinhthuctuyendung_selected, 'id_hinhthuctuyendung', 'chosen required');
+									'id', 'name', $hinhthuctuyendung_selected, 'bienche_hinhthuctuyendung_id', 'chosen required');
  		exit;
  	}
  	/**
@@ -193,7 +193,7 @@ class HososViewImport extends JViewLegacy {
 									'c.id as id, c.name as name, c.month as month',' a.id=b.hinhthuc_id and c.id=b.thoihan_id and c.`status`=1 and a.id='.$bienche_hinhthuc_id,
 									'id asc',
 									'--Chọn Thời hạn--',
-									'id', 'name', $thietlapthoihan_selected, 'id_thietlapthoihan', 'chosen required', 'month', 'month');
+									'id', 'name', $thietlapthoihan_selected, 'bienche_thoihanbienchehopdong_id', 'chosen required', array('month'=>'month'));
  		exit;
  	}
  	
