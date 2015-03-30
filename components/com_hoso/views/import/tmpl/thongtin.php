@@ -370,11 +370,11 @@ jQuery('body').delegate('.btn_quaylai', 'click', function(){
 					<div class="controls">
 						<div class="row-fluid input-append">
 							<?php echo $model->getCbo('cb_bac_heso a, cb_goiluong b, cb_goiluong_ngach c, ins_dept d',
-								'a.id as id, a.name as name',
+								'a.mangach as mangach, a.name as name',
 								' d.goiluong=b.id and b.id = c.id_goi and c.ngach=a.mangach and d.id='.$thongtinImportCanxem->congtac_donvi_id,
 								'id asc',
 								'--Chọn Ngạch--',
-								'id', 'name', $thongtinImportCanxem->luong_mangach, 'luong_mangach', 'chosen required');?>
+								'mangach', 'name', $thongtinImportCanxem->luong_mangach, 'luong_mangach', 'chosen required');?>
 							<a data-toggle="modal" href="#modal-form" role="button" class="btn btn-small btn-warning add-on" id="btn-ngachkhac">
 								<i class="icon-wrench"></i> Ngạch khác
 							</a>
