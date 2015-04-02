@@ -17,22 +17,35 @@ defined( '_JEXEC' ) or die( 'Truy cập không hợp lệ' );
 		Import thông tin CBCCVC
 	</h4>
 </div>
-<div id="divimport">
-	<div>
-		Chọn tệp tin để upload: 
-		<input type="file" id="fileupload" name="fileupload"/>
-	</div>
-	<div>
-		<a data-original-title="Import" class="btn btn-small btn-primary" id="btn_import_fileupload" style="margin-right: 5px;">
-			<i class="icon-upload"></i> Import
-		</a>
-	</div>
-	<div id="ketqua">
+<div id="tab_danhsach" role="tabpanel">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="#listimport" aria-controls="home" role="tab" data-toggle="tab">Danh sách import</a></li>
+		    <li role="presentation"><a href="#tabimport" aria-controls="profile" role="tab" data-toggle="tab">Import</a></li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="listimport" style="min-height: 1200px">
+				<div id="danhsachimport">
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="tabimport" style="min-height: 1200px">
+				<div id="divimport">
+					<div>
+						Chọn tệp tin để upload: 
+						<input type="file" id="fileupload" name="fileupload"/>
+					</div>
+					<div>
+						<a data-original-title="Import" class="btn btn-small btn-primary" id="btn_import_fileupload" style="margin-right: 5px;">
+							<i class="icon-upload"></i> Import
+						</a>
+					</div>
+					<div id="ketqua">
+				</div>
+				</div>
+			</div>
+		</div>
 </div>
-</div>
-<div id="danhsachimport">
-</div>
-<!-- Modal -->
 <div id="div_xemchitiet"></div>
 <script type="text/javascript">
 var dp = function(){
@@ -176,7 +189,7 @@ var refresh = function() {
 //		    		xhtml +='<td>'+$.date(data[i].start_date_ctd)+'</td>';else xhtml +='<td></td>';
 //		    		xhtml +='<td>'+data[i].donvidang_ctd+'</td>';
 	    		xhtml +='<td>'+data[i].ghichu+'</td>';
-	    		xhtml +='<td><span class="btn btn-mini btn-info btn_xemchitiet" data-toggle="modal"  data-target=".modal" style="cursor: pointer;" id_import="'+data[i].id+'" ><i class="icon-save"></i></span></td>';
+	    		xhtml +='<td><span class="btn btn-mini btn-info btn_xemchitiet add-on" data-toggle="modal"  data-target=".modal" style="cursor: pointer;" id_import="'+data[i].id+'" ><i class="icon-save"></i></span></td>';
 	    		xhtml +='</tr>';
 	    	}
 	    	xhtml+='</tbody></table></div>';
@@ -278,7 +291,7 @@ jQuery(document).ready(function($){
 			if ((isExcel(filefullname)) && ((filefullname.split(".").length - 1)==1)){
 				$.ajax({
 					type: 'POST',
-		  			url: '<?php echo JUri::base(true);?>/index.php?option=com_hoso&view=import&format=raw&task=uploadcbcc',
+		  			url: '<?php echo JUri::base(true);?>/index.php?option=com_hoso&controller=import&format=raw&task=uploadcbcc',
 		  			data: form_data,
 		  			dataType: 'text', 
 	                cache: false,
@@ -324,41 +337,13 @@ jQuery(document).ready(function($){
 
 	    return date;
 	};
-	
 	$('body').delegate('.btn_xemchitiet', 'click', function(){
 		var id_import = $(this).attr('id_import');
 		$.blockUI();
 		$('#div_xemchitiet').load('<?php echo JUri::base(true);?>/index.php?option=com_hoso&view=import&format=raw&task=thongtinImport&id_import='+id_import,function(){
-			$('#danhsachimport').css("display","none");
-			$('#divimport').css("display","none");
+			$('#tab_danhsach').html("");
 			$.unblockUI();
 		});
-	});
-	$('body').delegate('#cadc_code', 'change', function(){
-		var cadc_code = $(this).val(); 
-		$.ajax({
-			type: 'POST',
-			url: '<?php echo JUri::base(true);?>/index.php?option=com_hoso&view=import&format=raw&task=changeCadc',
-			data: { cadc_code : cadc_code},
-			success:function(data){
-				$('#div_dist_placebirth').html(data);
-				$('#div_comm_placebirth').html('<select id="comm_placebirth" class="chosen" name="comm_placebirth"><option value="">--Chọn phường/xã--</option></select>');
-				cs();
-			}
-		});
-	});
-	
-	$('body').delegate('#dist_placebirth', 'change', function(){
-		var dist_placebirth = $(this).val(); 
-		$.ajax({
-			type: 'POST',
-  			url: '<?php echo JUri::base(true);?>/index.php?option=com_hoso&view=import&format=raw&task=changeDist',
-  			data: {dist_placebirth:dist_placebirth},
-  			success:function(data){
-	  			$('#div_comm_placebirth').html(data);
-	  			cs();
-  			}
-        });
 	});
 	dp();
 });

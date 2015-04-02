@@ -38,9 +38,7 @@ class Hoso_Model_Import extends JModelLegacy {
 	//-------------- Các hàm thao tác cây đơn vị --------------------
 	/**
 	 * Lấy node gốc trên tree của acccount đang log
-	 *
 	 * @param   integer  $user->id  id account đăng nhập.
-	 *
 	 * @return  null|array  Trả về thông tin về node gốc.
 	 *
 	 */
@@ -52,9 +50,7 @@ class Hoso_Model_Import extends JModelLegacy {
 	}
 	/**
 	 * Lấy thông tin đơn vị từ don_id truyền vào
-	 *
 	 * @param	int	$root_id	node root hiện hành theo account đang log
-	 *
 	 * @return	string	Trả về tên của node
 	 */
 	public function getInfoByDonvi_id($root_id){
@@ -80,16 +76,6 @@ class Hoso_Model_Import extends JModelLegacy {
 			return 1; //năm
 		}else return 3;
 	}
-	
-// 	function getDonvi($donvi_id, $field){
-// 		$db = JFactory::getDbo();
-// 		$query = $db->getQuery(true);
-// 		$query	->select(array($field))
-// 		->from($db->quoteName('ins_dept','a'))
-// 		->where($db->quote($field).' ='.$db->quote($donvi_id));
-// 		$db->setQuery($query);
-// 		return $db->loadResult();
-// 	}
 	/**
 	 * Lấy thông tin các hồ sơ cán bộ theo đơn vị, phòng ban
 	 * @param string $donvi_id
@@ -164,6 +150,41 @@ class Hoso_Model_Import extends JModelLegacy {
 		->where('a.congtac_donvi_id ='.$db->quote($donvi_id).' OR '.'a.congtac_phong_id ='.$db->quote($donvi_id));
 		$db->setQuery($query);
 		return $db->loadObjectList();
+	}
+	/**
+	 * upload
+	 */
+	function uploadcbcc(){
+		require 'libraries\phpexcel\Classes\PHPExcel.php';
+		require_once 'libraries\phpexcel\Classes\PHPExcel\IOFactory.php';
+		$arr = array();
+		$user_import = jFactory::getUser()->id;
+		$md5 = md5(rand(0,999));
+		$hash = substr($md5, 15, 5);
+		$filename	= 	$hash.date('mdY').'_'.($this->regexFileUpload($_FILES['file']['name'], true));
+		move_uploaded_file($_FILES['file']['tmp_name'], $filename); // tải file lên server
+		$objPHPExcel = PHPExcel_IOFactory::load ($filename);
+		$objPHPExcel->setActiveSheetIndex(0); // lấy sheet đầu tiên
+		//  	$objPHPExcel->setActiveSheetIndexByName('DSCBCC'); // lấy sheet với tên DSCBCC
+		$highestColumn = $objPHPExcel->getActiveSheet()->getHighestColumn(); // số cột lớn nhất
+		$highestColumnIndex = PHPExcel_Cell::columnIndexFromString ( $highestColumn ); // số cột lớn nhất
+		$highestRow = $objPHPExcel->getActiveSheet()->getHighestRow(); // số hàng lớn nhất
+	
+		for($row = 3; $row <= $highestRow ; ++ $row) {
+			for($col = 0; $col < $highestColumnIndex; ++ $col) {
+				$cell = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow ( $col, $row );
+				$val = $cell->getValue ();
+				if ($row === 1)
+					echo $val;
+				else{
+					$arr[$row][$col]= $val;
+				}
+			}
+		}
+		unlink($filename); // xóa file khỏi hệ thống
+		// lưu dữ liệu vào db
+		$arrKq = $this->saveImport($arr);
+		return $arrKq;
 	}
 	/**
 	 * Lưu thông tin dữ liệu import của cbcc
@@ -339,7 +360,7 @@ class Hoso_Model_Import extends JModelLegacy {
 				'a.yim',
 				'a.maso_bhxh',
 				'a.maso_thue',
-				'a.cadc_code', // nguyên quán tỉnh thành
+				'a.cadc_code',
 				'a.dist_placebirth',
 				'a.comm_placebirth',
 				'a.bienche_hinhthuc_id',
@@ -493,6 +514,16 @@ class Hoso_Model_Import extends JModelLegacy {
 		);
 		return $result = JHtmlSelect::genericlist($data,$id,$options);
 	}
+	function checkVK($luong_mangach){
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select(array('MAX(a.idbac)'));
+		$query->from('cb_nhomngach_heso a')
+		->join('inner',' cb_bac_heso b ON a.sta_code = b.mangach');
+		$query->where('b.mangach="'.$luong_mangach.'"');
+		$db->setQuery($query);
+		return $db->loadResult();
+	}
 	/**
 	 * combobox với một danh mục đơn giản
 	 * @param string $select
@@ -535,4 +566,30 @@ class Hoso_Model_Import extends JModelLegacy {
 		);
 		return $result = JHtmlSelect::genericlist($data,$idname,$options);
 	}
+	/**
+	 * combobox chức vụ
+	 * @param string $select
+	 * @param string $id
+	 * @return string
+	 */
+	public function getCboChucvu($donvi_id, $chucvu_id=null, $chucvu_name=null){
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select(array('a.pos_system_id as pos_system_id, a.name as name'))
+		->from('cb_goichucvu_chucvu a')
+		->join('inner','cb_goichucvu b ON a.goichucvu_id=b.id')
+		->join('inner','ins_dept c on b.id=c.goichucvu')
+		->where('c.id='.$donvi_id);
+		$db->setQuery($query);
+		$tmp = $db->loadObjectList();
+		$str	=	'<select class="chosen" id="congtac_chucvu_id" name="congtac_chucvu_id">
+				<option value="">Không chức vụ</option>';
+		for ($i=0; $i<count($tmp);$i++){
+			if ($tmp[$i]->pos_system_id ==$chucvu_id && $tmp[$i]->name == $chucvu_name) $sl='selected="selected"'; else $sl='';
+			$str .='<option '.$sl.' value="'.$tmp[$i]->pos_system_id.'">'.$tmp[$i]->name.'</option>';
+		}	
+		$str.='</select>';
+		return $str;
+	}
+	
 }

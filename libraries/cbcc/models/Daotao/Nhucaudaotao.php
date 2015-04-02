@@ -154,11 +154,17 @@ class Daotao_Model_Nhucaudaotao extends JModelLegacy {
 		$query = $db->getQuery(true);
 		$query	->select(array('a.e_name','nc.name_loaitrinhdo','nc.name_chuyennganh','nc.name_trinhdo','nc.ngaydangky','nc.trangthai','nc.ngayxuly','nc.id_ncdt'))
 		->from($db->quoteName('nhucaudaotao','nc'))
-		->join('inner', $db->quoteName('hosochinh', 'a') . ' ON (' . $db->quoteName('a.id') . ' = ' . $db->quoteName('nc.empid') . ')');
-		$query->where($db->quoteName('a.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('a.dept_code').'='.$db->quote($inst_code));
+		->join('inner', $db->quoteName('hosochinh', 'a') . ' ON (' . $db->quoteName('a.id') . ' = ' . $db->quoteName('nc.empid') . ')')
+		->join('inner', $db->quoteName('hosochinh_quatrinhhientai', 'b') . ' ON (' . $db->quoteName('b.hosochinh_id') . ' = ' . $db->quoteName('a.id') . ') ');
+		$query->where('( '.$db->quoteName('a.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('a.dept_code').'='.$db->quote($inst_code).')');
+		$query->where('b.hoso_trangthai = "00" ');
+		$donviloaitru = $this->getUnManageDonvi(JFactory::getUser()->id, 'com_nhucaudaotao', 'treeview' ,'treenhucautonghop');
+		if($donviloaitru!='')
+			$query->where('a.inst_code NOT IN ('.$donviloaitru.') and a.dept_code NOT IN ('.$donviloaitru.')');
 		$query->order('trangthai ASC,ngaydangky ASC, id_loaitrinhdo DESC');
 		$db->setQuery($query);
 		return $db->loadObjectList();
+		
 	}
 	/**
 	 * Lấy hoso_id bằng user_id login
@@ -379,9 +385,15 @@ class Daotao_Model_Nhucaudaotao extends JModelLegacy {
 		// lấy danh sách cán bộ tại đơn vị theo inst_code -> từ tree, select = option đã chọn
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query	->select(array('id, e_name'))
-		->from($db->quoteName('hosochinh','a'));
-		$query->where($db->quoteName('a.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('a.dept_code').'='.$db->quote($inst_code));
+		$query	->select(array('a.id, a.e_name'))
+		->from($db->quoteName('hosochinh','a'))
+		->join('inner', $db->quoteName('hosochinh_quatrinhhientai', 'b') . ' ON (' . $db->quoteName('b.hosochinh_id') . ' = ' . $db->quoteName('a.id') . ') ');
+		$query->where('( '.$db->quoteName('a.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('a.dept_code').'='.$db->quote($inst_code).')');
+		$query->where('b.hoso_trangthai = "00" ');
+// 		$donviloaitru = Core::getUnManageDonvi(JFactory::getUser()->id);
+		$donviloaitru = $this->getUnManageDonvi(JFactory::getUser()->id, 'com_nhucaudaotao', 'treeview','treenhucautonghop');
+		if($donviloaitru!='')
+		$query->where('a.inst_code NOT IN ('.$donviloaitru.') and a.dept_code NOT IN ('.$donviloaitru.')');
 		$db->setQuery($query);
 		$arrCanbo = $db->loadObjectList();
 		$data=array();
@@ -401,4 +413,32 @@ class Daotao_Model_Nhucaudaotao extends JModelLegacy {
 		);
 		return $result = JHtmlSelect::genericlist($data,'empid',$options);
 	}
+	//
+	public static function getUnManageDonvi($id_user,$component = null,$controller=null,$task=null,$location='site'){
+		if ($id_user == null) {
+			return null;
+		}
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('DISTINCT uad.param_donvi')
+		->from(' core_user_action_loaitrudonvi AS uad  ')
+		->join('INNER', 'core_action AS b ON uad.action_id = b.id')
+		->where(" uad.user_id = ".$db->quote($id_user))
+		;
+		if ($component != null) {
+			$query->where('b.component = '.$db->q($component));
+		}
+		if ($controller != null) {
+			$query->where('b.controllers = '.$db->q($controller));
+		}
+		if ($task != null) {
+			$query->where('b.tasks = '.$db->q($task));
+		}
+		if ($location != null) {
+			$query->where('b.location = '.$db->q($location));
+		}
+		$db->setQuery( $query);
+		return $db->loadResult();
+	}
+	//
 }

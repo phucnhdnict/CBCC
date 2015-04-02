@@ -20,6 +20,7 @@ $model = Core::model('Daotao/Nhucaudaotao');
 </style>
 <script>
 var id;
+var type;
 var refreshData = function (){
 	jQuery.blockUI();
 	jQuery.ajax({
@@ -217,7 +218,7 @@ jQuery(document).ready(function($){
 		 }).bind("select_node.jstree", function (e, data) {
 			id = data.rslt.obj.attr("id").replace("node_","");
 			type = data.rslt.obj.attr('rel');
-			if(type == "file" || type == "folder")
+			if(type == "file" || type == "folder" || type==undefined)
 				refreshData();				
 			else{
 				data.inst.toggle_node(data.rslt.obj);
@@ -253,8 +254,11 @@ jQuery(document).ready(function($){
 	});
 	// P bo sung 3/3/2015
 	$('body').delegate('#btn_add_nhucaudaotao', 'click', function(){ 
-		$('#div_edit_tonghopthemmoi').load('<?php echo JUri::base(true);?>/index.php?option=com_nhucaudaotao&view=nhucaudaotao&format=raw&task=tonghopthemmoi&donvi_id='+id,function(){
-		});
+// 		type = data.rslt.obj.attr('rel');
+		if(type == "file" || type == "folder" || type==undefined)
+			$('#div_edit_tonghopthemmoi').load('<?php echo JUri::base(true);?>/index.php?option=com_nhucaudaotao&view=nhucaudaotao&format=raw&task=tonghopthemmoi&donvi_id='+id,function(){
+			});
+		else {alert('Vui lòng chọn đơn vị'); return false;}
 	});
         
         $('body').delegate('.btn_hieuchinh_nhucaudaotao', 'click', function(){ 

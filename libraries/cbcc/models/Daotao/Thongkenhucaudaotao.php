@@ -110,30 +110,62 @@ class Daotao_Model_Thongkenhucaudaotao extends JModelLegacy {
 					-- quốc phòng an ninh
 					count(if(qphong.step=1 or qphong.step=2,1,NULL)) qphong_12,
 					count(if(qphong.step=3,1,NULL)) qphong_3,
-					count(if(qphong.step=4 or qphong.step=5,1,NULL)) qphong_45,
+					count(if(qphong.step=4 or qphong.step=5,1,NULL)) qphong_45
 					-- tổng
-					count(nc.id_loaitrinhdo) tong
+					-- tính TỔNG ngoài site
 					from nhucaudaotao nc
 					left join cla_sca_code td on nc.id_loaitrinhdo = td.tosc_code and td.tosc_code=2 and nc.id_trinhdo=td.`code`
 					left join cla_sca_code ctri on nc.id_loaitrinhdo=ctri.tosc_code and ctri.tosc_code=3 and nc.id_trinhdo =ctri.`code`
 					left join cla_sca_code qphong on nc.id_loaitrinhdo=qphong.tosc_code and qphong.tosc_code=17 and nc.id_trinhdo =qphong.`code` 
 					left join cla_sca_code tinhoc on nc.id_loaitrinhdo=tinhoc.tosc_code and tinhoc.tosc_code=7  and nc.id_trinhdo =tinhoc.`code`
 					left join cla_sca_code qlnn on nc.id_loaitrinhdo=qlnn.tosc_code and qlnn.tosc_code=5 and nc.id_trinhdo=qlnn.`code` 
-					left join cla_sca_code tienganh on nc.id_loaitrinhdo=tienganh.tosc_code and tienganh.ls_code=340646 and tienganh.tosc_code=6 and nc.id_trinhdo=tienganh.`code`
+					left join cla_sca_code tienganh on nc.id_loaitrinhdo=tienganh.tosc_code and tienganh.ls_code = 340646 and tienganh.tosc_code=6 and nc.id_trinhdo=tienganh.`code`
 					left join cla_sca_code nnkhac on nc.id_trinhdo=nnkhac.`code` and nc.id_loaitrinhdo= nnkhac.tosc_code and nc.name_trinhdo=nnkhac.`name` and nnkhac.ls_code!=340646 and nnkhac.tosc_code=6
 					left join hosochinh b on nc.empid=b.id 
 					left join hosochinh_quatrinhhientai c on b.id = c.hosochinh_id and c.hoso_trangthai = "00"
 					right JOIN (
 					-- tính tổng các node con thành phần
-					  SELECT node.id FROM ins_dept AS node, ins_dept AS parent
-					  WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.id = '.$donvi_id.'
-					  ) AS dvbc ON b.inst_code = dvbc.id
-					where nc.trangthai = 0 ';
+					  SELECT distinct(node.id) FROM ins_dept AS node, ins_dept AS parent
+					  WHERE node.lft BETWEEN parent.lft AND parent.rgt AND  parent.id = '.$donvi_id.' and
+						if (parent.id=node.parent_id, node.id = '.$donvi_id.', parent.id = '.$donvi_id.')
+					  ) AS dvbc ON (b.inst_code = dvbc.id or b.dept_code = dvbc.id)
+					where nc.trangthai = 0  ';
+		$donviloaitru = $this->getUnManageDonvi(JFactory::getUser()->id, 'com_nhucaudaotao', 'treeview' ,'treethongkenhucau');
+		if($donviloaitru!='')
+			$query.=' and b.inst_code NOT IN ('.$donviloaitru.') and b.dept_code NOT IN ('.$donviloaitru.')';
 		if($tungay!="" || $tungay != null) $query .='and nc.ngaydangky >=  STR_TO_DATE("'.$tungay.'","%d/%m/%Y")';
 		if($denngay!="" || $denngay != null) $query .='and nc.ngaydangky <= STR_TO_DATE("'.$denngay.'","%d/%m/%Y")';
 		if($donvi_id!="") $db->setQuery($query);
 		return $db->loadObjectList();
 	}
+	//
+	public static function getUnManageDonvi($id_user,$component = null,$controller=null,$task=null,$location='site'){
+		if ($id_user == null) {
+			return null;
+		}
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('DISTINCT uad.param_donvi')
+		->from(' core_user_action_loaitrudonvi AS uad  ')
+		->join('INNER', 'core_action AS b ON uad.action_id = b.id')
+		->where(" uad.user_id = ".$db->quote($id_user))
+		;
+		if ($component != null) {
+			$query->where('b.component = '.$db->q($component));
+		}
+		if ($controller != null) {
+			$query->where('b.controllers = '.$db->q($controller));
+		}
+		if ($task != null) {
+			$query->where('b.tasks = '.$db->q($task));
+		}
+		if ($location != null) {
+			$query->where('b.location = '.$db->q($location));
+		}
+		$db->setQuery( $query);
+		return $db->loadResult();
+	}
+	//
 	/**
 	 * Lấy thông tin thống kê của một đơn vị, trả về array để xuất excel
 	 * @param string $donvi_id mã đơn vị
@@ -146,7 +178,7 @@ class Daotao_Model_Thongkenhucaudaotao extends JModelLegacy {
 		$query = $db->getQuery(true);
 		$query = '  select "'.$this->getInfoByDonvi_id($donvi_id).'" as donvi_name,
 					-- tổng
-					count(nc.id_loaitrinhdo) tong, 
+					0 tong,
 				    -- chuyên môn
 					count(if(td.step=1,1,NULL)) tiensi, 
 					count(if(td.step=2,1,NULL)) thacsi, 
@@ -192,10 +224,14 @@ class Daotao_Model_Thongkenhucaudaotao extends JModelLegacy {
 					left join hosochinh_quatrinhhientai c on b.id = c.hosochinh_id and c.hoso_trangthai = "00"
 					right JOIN (
 					-- tính tổng các node con thành phần
-					  SELECT node.id FROM ins_dept AS node, ins_dept AS parent
-					  WHERE node.lft BETWEEN parent.lft AND parent.rgt AND parent.id = '.$donvi_id.'
-					  ) AS dvbc ON b.inst_code = dvbc.id
-					where nc.trangthai = 0 ';
+					  SELECT distinct(node.id) FROM ins_dept AS node, ins_dept AS parent
+					  WHERE node.lft BETWEEN parent.lft AND parent.rgt AND  parent.id = '.$donvi_id.' and
+						if (parent.id=node.parent_id, node.id = '.$donvi_id.', parent.id = '.$donvi_id.')
+					  ) AS dvbc ON (b.inst_code = dvbc.id or b.dept_code = dvbc.id)
+					where nc.trangthai = 0  ';
+		$donviloaitru = $this->getUnManageDonvi(JFactory::getUser()->id, 'com_nhucaudaotao', 'treeview' ,'treethongkenhucau');
+		if($donviloaitru!='')
+			$query.=' and b.inst_code NOT IN ('.$donviloaitru.') and b.dept_code NOT IN ('.$donviloaitru.')';
 		if($tungay!="" || $tungay != null) $query .='and nc.ngaydangky >=  STR_TO_DATE("'.$tungay.'","%d/%m/%Y")';
 		if($denngay!="" || $denngay != null) $query .='and nc.ngaydangky <= STR_TO_DATE("'.$denngay.'","%d/%m/%Y")';
 		$db->setQuery($query);

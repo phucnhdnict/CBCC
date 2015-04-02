@@ -47,9 +47,15 @@ class Hoso_Model_Quyhoachcanbo extends JModelLegacy {
 		// lấy danh sách cán bộ tại đơn vị theo inst_code -> từ tree, select = option đã chọn
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query	->select(array('id,e_name'))
-		->from($db->quoteName('hosochinh','a'));
-		$query->where($db->quoteName('a.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('a.dept_code').'='.$db->quote($inst_code));
+		$query	->select(array('a.id,a.e_name'))
+		->from($db->quoteName('hosochinh','a'))
+		->join('inner', $db->quoteName('hosochinh_quatrinhhientai', 'b') . ' ON (' . $db->quoteName('b.hosochinh_id') . ' = ' . $db->quoteName('a.id') . ') ');
+		$query->where('( '.$db->quoteName('a.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('a.dept_code').'='.$db->quote($inst_code).')');
+		$query->where('b.hoso_trangthai = "00" ');
+// 		$donviloaitru = Core::getUnManageDonvi(JFactory::getUser()->id);
+		$donviloaitru = $this->getUnManageDonvi(JFactory::getUser()->id, 'com_hoso', 'treeview', 'treequyhoach');
+		if($donviloaitru!='')
+			$query->where('a.inst_code NOT IN ('.$donviloaitru.') and a.dept_code NOT IN ('.$donviloaitru.')');
 		$db->setQuery($query);
 		$arrCanbo = $db->loadObjectList();
 		$data=array();
@@ -196,12 +202,43 @@ class Hoso_Model_Quyhoachcanbo extends JModelLegacy {
 		->from($db->quoteName('quyhoachcanbo','a'))
 		->join('inner', $db->quoteName('hosochinh', 'b') . ' ON (' . $db->quoteName('b.id') . ' = ' . $db->quoteName('a.emp_id') . ')')
 		->join('inner', $db->quoteName('hosochinh_quatrinhhientai', 'ht') . ' ON (' . $db->quoteName('a.emp_id') . ' = ' . $db->quoteName('ht.hosochinh_id') . ')')
-		->join('left', $db->quoteName('ins_dept', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('b.dept_code') . ')');
-		$query->where($db->quoteName('b.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('b.dept_code').'='.$db->quote($inst_code))
+		->join('left', $db->quoteName('ins_dept', 'c') . ' ON (' . $db->quoteName('c.id') . ' = ' . $db->quoteName('b.dept_code') . ')')
+		->where('('.$db->quoteName('b.inst_code').'='.$db->quote($inst_code).' OR '.$db->quoteName('b.dept_code').'='.$db->quote($inst_code).')')
 		->where('ht.hoso_trangthai = "00"');
+		
+		$donviloaitru = $this->getUnManageDonvi(JFactory::getUser()->id, 'com_hoso', 'treeview', 'treequyhoach');
+		if($donviloaitru!='')
+			$query->where('b.inst_code NOT IN ('.$donviloaitru.') and b.dept_code NOT IN ('.$donviloaitru.')');
 		$query->order('a.start_year desc, a.pos_td asc');
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
-	
+	//
+	public static function getUnManageDonvi($id_user,$component = null,$controller=null,$task=null,$location='site'){
+		if ($id_user == null) {
+			return null;
+		}
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('DISTINCT uad.param_donvi')
+		->from(' core_user_action_loaitrudonvi AS uad  ')
+		->join('INNER', 'core_action AS b ON uad.action_id = b.id')
+		->where(" uad.user_id = ".$db->quote($id_user))
+		;
+		if ($component != null) {
+			$query->where('b.component = '.$db->q($component));
+		}
+		if ($controller != null) {
+			$query->where('b.controllers = '.$db->q($controller));
+		}
+		if ($task != null) {
+			$query->where('b.tasks = '.$db->q($task));
+		}
+		if ($location != null) {
+			$query->where('b.location = '.$db->q($location));
+		}
+		$db->setQuery( $query);
+		return $db->loadResult();
+	}
+	//
 }

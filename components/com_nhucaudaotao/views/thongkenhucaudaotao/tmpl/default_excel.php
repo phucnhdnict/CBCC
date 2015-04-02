@@ -117,7 +117,10 @@ for($i=0; $i<sizeof($arr);$i++)
 	for($j=0; $j<=26;$j++)
 	{	$pos = $alpha.$start; // vị trí A1, B2,...
 		$activeSheet->setCellValue('A'.$start, $stt);
-		$activeSheet->setCellValue($pos, $arr[$i][0][$j]);
+		if ($j==1) //1 là cột Tổng
+			$activeSheet->setCellValue($pos, array_sum($arr[$i][0]));
+		else 
+			$activeSheet->setCellValue($pos, $arr[$i][0][$j]); 
 		$alpha++;
 	}
 	$alpha ='B';

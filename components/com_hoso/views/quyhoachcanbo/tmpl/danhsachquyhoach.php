@@ -21,6 +21,7 @@ $model = Core::model('Hoso/Quyhoachcanbo');
 </div>
 <script>
 var id;
+var type;
 var a = function(){
 	jQuery.blockUI();	
 	jQuery.ajax({
@@ -69,8 +70,10 @@ var a = function(){
 };
 jQuery(document).ready(function($){
 	createTreeviewInMenuBar('Cây đơn vị');
-	$('body').delegate('#btn_add_quyhoachcanbo', 'click', function(){ 
-		$('#div_popup_quyhoachcanbo').load('<?php echo JUri::base(true);?>/index.php?option=com_hoso&view=quyhoachcanbo&format=raw&task=addQuyhoachcanbo&donvi_id='+id,function(){});
+	$('body').delegate('#btn_add_quyhoachcanbo', 'click', function(){
+		if(type == "file" || type == "folder" || type==undefined) 
+			$('#div_popup_quyhoachcanbo').load('<?php echo JUri::base(true);?>/index.php?option=com_hoso&view=quyhoachcanbo&format=raw&task=addQuyhoachcanbo&donvi_id='+id,function(){});
+		else {alert('Vui lòng chọn đơn vị'); return false;}
 	});
 	$('body').delegate('.btn_edit_quyhoachcanbo', 'click', function(){ 
 		var id_qhcb = $(this).attr('id_qhcb');
@@ -145,7 +148,7 @@ jQuery(document).ready(function($){
 		 }).bind("select_node.jstree", function (e, data) {
 			id = data.rslt.obj.attr("id").replace("node_","");
 			type = data.rslt.obj.attr('rel');
-			if(type == "file" || type == "folder")
+			if(type == "file" || type == "folder" || type==undefined)
 				a();				
 			else{
 				data.inst.toggle_node(data.rslt.obj);

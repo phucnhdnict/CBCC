@@ -44,7 +44,8 @@ class HosoModelTreeview extends JModelLegacy{
 	}
 	public function treeViewQuyhoach($id_parent,$option = array()){
 		$db = JFactory::getDbo();
-		$exceptionUnits = Core::getUnManageDonvi(JFactory::getUser()->id,'com_hoso','treeview','treequyhoach');
+// 		$exceptionUnits = Core::getUnManageDonvi(JFactory::getUser()->id,'com_hoso','treeview','treequyhoach');
+		$exceptionUnits = $this->getUnManageDonvi(JFactory::getUser()->id,'com_hoso','treeview','treequyhoach');
 		$exception_condition = ($exceptionUnits)?' AND a.id NOT IN ('.$exceptionUnits.')':'';
 		$query = 'SELECT a.id,a.parent_id,a.type,a.name,a.level,a.lft,a.rgt,a.active
 					FROM ins_dept AS a 
@@ -70,8 +71,9 @@ class HosoModelTreeview extends JModelLegacy{
 	 * @return string
 	 */
 	
-	public function treeImportHoso($id_parent){
+	public function treeImportHoso($id_parent, $option=null){
 		$db = JFactory::getDbo();
+// 		$exceptionUnits = Core::getUnManageDonvi(JFactory::getUser()->id,'com_hoso','treeview','treeImportHoso');
 		$exceptionUnits = $this->getUnManageDonvi(JFactory::getUser()->id,'com_hoso','treeview','treeImportHoso');
 		$exception_condition = ($exceptionUnits)?' AND a.id NOT IN ('.$exceptionUnits.')':'';
 		$query = "SELECT a.id,a.parent_id,a.type,a.name,a.level,a.lft,a.rgt,a.active

@@ -200,8 +200,15 @@ jQuery(document).ready(function($){
 	  			success:function(data){
 	  	  			for(var i=0; i< data.length; i++){
 	  	  	  			if(typeof data[i][0].tiensi !='undefined'){
+		  	  	  			var tong = parseInt(data[i][0].tiensi)+parseInt(data[i][0].thacsi)+parseInt(data[i][0].daihoc)+parseInt(data[i][0].caodang)
+		  	  	  			+parseInt(data[i][0].trungcap)+parseInt(data[i][0].conlai)+parseInt(data[i][0].cunhan_ctri)
+				  	  	  	+parseInt(data[i][0].caocap_ctri)+parseInt(data[i][0].trungcap_ctri)+parseInt(data[i][0].trendaihoc_tinhoc)+parseInt(data[i][0].tccd_tinhoc)
+				  	  	  	+parseInt(data[i][0].coso_tinhoc)+parseInt(data[i][0].trendaihoc_tienganh)+parseInt(data[i][0].tccd_tienganh)+parseInt(data[i][0].coso_tienganh)
+				  	  	  	+parseInt(data[i][0].trendaihoc_nnkhac)+parseInt(data[i][0].tccd_nnkhac)+parseInt(data[i][0].coso_nnkhac)
+				  	  	  	+parseInt(data[i][0].qlnn_cvcc)+parseInt(data[i][0].qlnn_cvc)+parseInt(data[i][0].qlnn_cv)
+				  	  	  	+parseInt(data[i][0].qphong_12)+parseInt(data[i][0].qphong_3)+parseInt(data[i][0].qphong_45)+parseInt(data[i][0].khac);
 	  						xhtml +='<tr>';
-	  		  				xhtml +='<td class="center">'+(i+1)+'</td><td>'+data[i][0].donvi_name+'</td><td>'+data[i][0].tong+'</td><td>'+data[i][0].tiensi+'</td>';
+	  		  				xhtml +='<td class="center">'+(i+1)+'</td><td>'+data[i][0].donvi_name+'</td><td>'+tong+'</td><td>'+data[i][0].tiensi+'</td>';
 	  		  				xhtml +='<td>'+data[i][0].thacsi+'</td><td>'+data[i][0].daihoc+'</td><td>'+data[i][0].caodang+'</td>';
 	  		  				xhtml +='<td>'+data[i][0].trungcap+'</td><td>'+data[i][0].conlai+'</td><td>'+data[i][0].cunhan_ctri+'</td>';
 	  		  				xhtml +='<td>'+data[i][0].caocap_ctri+'</td><td>'+data[i][0].trungcap_ctri+'</td><td>'+data[i][0].trendaihoc_tinhoc+'</td><td>'+data[i][0].tccd_tinhoc+'</td>';
@@ -217,7 +224,7 @@ jQuery(document).ready(function($){
 	  				
 	  			}
 	        });
-    	}else alert("Phải chọn đơn vị rồi mới hiển thị");
+    	}else alert("Vui lòng chọn đơn vị!");
 	});
 	function hienthithead(){
 		var str='';
