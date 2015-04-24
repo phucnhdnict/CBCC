@@ -154,14 +154,14 @@ class Hoso_Model_Import extends JModelLegacy {
 	/**
 	 * upload
 	 */
-	function uploadcbcc(){
+	function uploadcbcc($name=null,$tmp_name=null){
 		require 'libraries\phpexcel\Classes\PHPExcel.php';
 		require_once 'libraries\phpexcel\Classes\PHPExcel\IOFactory.php';
 		$arr = array();
 		$user_import = jFactory::getUser()->id;
 		$md5 = md5(rand(0,999));
-		$hash = substr($md5, 15, 5);
-		$filename	= 	$hash.date('mdY').'_'.($this->regexFileUpload($_FILES['file']['name'], true));
+		$hash = substr($md5, 15, 10);
+		$filename	= 	$hash.date('mdY').''.($this->regexFileUpload($_FILES['file']['name'], true));
 		move_uploaded_file($_FILES['file']['tmp_name'], $filename); // tải file lên server
 		$objPHPExcel = PHPExcel_IOFactory::load ($filename);
 		$objPHPExcel->setActiveSheetIndex(0); // lấy sheet đầu tiên
@@ -174,7 +174,7 @@ class Hoso_Model_Import extends JModelLegacy {
 			for($col = 0; $col < $highestColumnIndex; ++ $col) {
 				$cell = $objPHPExcel->getActiveSheet()->getCellByColumnAndRow ( $col, $row );
 				$val = $cell->getValue ();
-				if ($row === 1)
+				if ($row == 1)
 					echo $val;
 				else{
 					$arr[$row][$col]= $val;
@@ -325,14 +325,14 @@ class Hoso_Model_Import extends JModelLegacy {
 				"u","u","u","u","u","u","u","u","u","u","u",
 				"y","y","y","y","y",
 				"d",
-				"A","A","A","A","A","A","A","A","A","A","A","A",
-				"A","A","A","A","A",
-				"E","E","E","E","E","E","E","E","E","E","E",
-				"I","I","I","I","I",
-				"O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O",
-				"U","U","U","U","U","U","U","U","U","U","U",
-				"Y","Y","Y","Y","Y",
-				"D","_");
+				"a","a","a","a","a","a","a","a","a","a","a","a",
+				"a","a","a","a","a",
+				"e","e","e","e","e","e","e","e","e","e","e",
+				"i","i","i","i","i",
+				"o","o","o","o","o","o","o","o","o","o","o","o","o","o","o","o","o",
+				"u","u","u","u","u","u","u","u","u","u","u",
+				"y","y","y","y","y",
+				"d","_");
 		if ($tolower) {
 			return strtolower(str_replace($marTViet,$marKoDau,$cs));
 		}

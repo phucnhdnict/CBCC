@@ -14,7 +14,7 @@ class NhucaudaotaoModelTreeview extends JModelLegacy{
 		$query = 'SELECT a.id,a.parent_id,a.type,a.name,a.level,a.lft,a.rgt,a.active
 					FROM ins_dept AS a
 					WHERE a.active = 1  AND a.parent_id = '.$db->quote($id_parent).$exception_condition.'
-					ORDER BY a.name COLLATE utf8_unicode_ci';
+					ORDER BY a.lft';
 		$db->setQuery($query);
 		$rows = $db->loadAssocList();
 		$arrTypes = array('file','folder','root');
@@ -42,7 +42,7 @@ class NhucaudaotaoModelTreeview extends JModelLegacy{
 		$query = 'SELECT a.id,a.parent_id,a.type,a.name,a.level,a.lft,a.rgt,a.active
 					FROM ins_dept AS a
 					WHERE a.active = 1 AND a.parent_id = '.$db->quote($id_parent).$exception_condition.'
-					ORDER BY a.name COLLATE utf8_unicode_ci';
+					ORDER BY a.lft';
 		$db->setQuery($query);
 		$rows = $db->loadAssocList();
 		$arrTypes = array('file','folder','root');

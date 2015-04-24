@@ -2,6 +2,13 @@
 defined( '_JEXEC' ) or die( 'Truy cập không hợp lệ' );
 $model = Core::model('Daotao/Nhucaudaotao');
 ?>
+<style>
+table.dataTable thead .sorting, 
+table.dataTable thead .sorting_asc, 
+table.dataTable thead .sorting_desc {
+    background : none;
+}
+</style>
 <div id="tabNhucaudaotao" class="tab-pane active">
 </div>
 <div class="modal fade" id="div-modal" style="width:900px;margin-left:-430px" tabindex="-1" role="dialog" >

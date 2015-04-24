@@ -22,6 +22,7 @@ class HososViewImport extends JViewLegacy {
  function importHoso(){
  	$document = JFactory::getDocument();
  	$document->addScript(JUri::base(true).'/media/cbcc/js/dataTables-1.10.0/jquery.dataTables.min.js');
+ 	$document->addScript(JUri::base(true).'/media/cbcc/js/bootstrap.tab.ajax.js');
  	$document->addStyleSheet(JUri::base(true).'media/cbcc/js/dataTables-1.10.0/css/jquery.dataTables.min.css');
  	$model = Core::model('Hoso/Import');
  	$idUser = JFactory::getUser()->id;

@@ -20,6 +20,7 @@ class NhucaudaotaoViewThongkenhucaudaotao extends JViewLegacy {
  	$document->addScript(JURI::base(true).'/media/cbcc/js/jquery/jquery.cookie.js');
  	$document->addScript(JURI::base(true).'/media/cbcc/js/jstree/jquery.jstree.js');
  	$document->addScript( JURI::base(true).'/media/cbcc/js/caydonvi.js' );
+ 	$document->addStyleSheet(JUri::base(true).'media/cbcc/js/dataTables-1.10.0/css/jquery.dataTables.min.css');
  	
  	$model = Core::model('Daotao/Thongkenhucaudaotao');
  	$idUser = JFactory::getUser()->id;

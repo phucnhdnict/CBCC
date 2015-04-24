@@ -79,13 +79,13 @@ class Daotao_Model_Thongkenhucaudaotao extends JModelLegacy {
 					count(if(td.step=5,1,NULL)) trungcap,
 					count(if(td.step>=6,1,NULL)) conlai,
 					-- lý luận chính trị
-					--count(if(ctri.step=0,1,NULL)) tiensi_ctri,
-					--count(if(ctri.step=1,1,NULL)) thacsi_ctri,
-					--count(if(ctri.step=2,1,NULL)) daihoc_ctri,
+					-- count(if(ctri.step=0,1,NULL)) tiensi_ctri,
+					-- count(if(ctri.step=1,1,NULL)) thacsi_ctri,
+					-- count(if(ctri.step=2,1,NULL)) daihoc_ctri,
 					count(if(ctri.step<3,1,NULL)) cunhan_ctri,
 					count(if(ctri.step=3,1,NULL)) caocap_ctri,
 					count(if(ctri.step>=4,1,NULL)) trungcap_ctri,
-					--count(if(ctri.step=5,1,NULL)) socap_ctri,
+					-- count(if(ctri.step=5,1,NULL)) socap_ctri,
 					count(if(ctri.step=5 or ctri.step=2 or ctri.step=3 or ctri.step=4 or ctri.step=1 or ctri.step=0 ,1,NULL)) tong_ctri,
 					-- tin học
 					count(if(tinhoc.step<=2,1,NULL)) trendaihoc_tinhoc,

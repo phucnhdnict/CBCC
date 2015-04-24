@@ -4,25 +4,24 @@ class JConfig {
 	public $offline_message = 'Trang web này đang được bảo trì.</br>Xin quay trở lại sau. ';
 	public $display_offline_message = '1';
 	public $offline_image = '';
-	public $sitename = 'Tri learning';
+	public $sitename = 'CBCC';
 	public $editor = 'tinymce';
 	public $captcha = '0';
 	public $list_limit = '10';
 	public $access = '1';
 	public $debug = '0';
 	public $debug_lang = '0';
-	public $dbtype = 'mysqli';
-
-	public $user = 'root';
-
-	public $host = 'localhost';
-	public $password = '';
-	public $db = 'cbccvc_v2_2503';
-//  	public $host = '10.49.45.51';
-//  	public $password = '123456';
-//  	public $db = 'cbcc_code';
 	
-
+	public $dbtype = 'mysqli';
+// 	public $user = 'root';
+// 	public $host = 'localhost';
+// 	public $password = '';
+// 	public $db = 'cbccvc_v2_2503';
+	public $user = 'root';
+	public $host = '10.49.45.51';
+	public $password = '123456';
+	public $db = 'cbcc_test';
+	
 	public $dbprefix = 'jos_';
 	public $live_site = '';
 	public $secret = 'UPhHpEuT0TtQxsav';

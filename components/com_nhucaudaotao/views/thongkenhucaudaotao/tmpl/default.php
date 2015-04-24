@@ -6,6 +6,13 @@
  */ 
 $thongke = $this->thongke;
 ?>
+<style>
+table.dataTable thead .sorting, 
+table.dataTable thead .sorting_asc, 
+table.dataTable thead .sorting_desc {
+    background : none;
+}
+</style>
 <ul id="myTab" class="nav nav-tabs">
 	<li class="active">	
 		<a href="#tab_thongkenhucau" data-tab-url="/index.php?option=com_nhucaudaotao&controller=thongkenhucaudaotao&task=default&format=raw" data-toggle="tab" class="loaded">
@@ -123,7 +130,7 @@ jQuery(document).ready(function($){
 		  }
 		  },
 		  "checkbox": {
-              two_state: true,
+              two_state: false,
               override_ui: false,
               real_checkboxes:false,
               real_checkboxes_names:function(n){
@@ -221,7 +228,39 @@ jQuery(document).ready(function($){
 	  		  				xhtml='';
 	  	  				}
 	  	  			}
-	  				
+		  	  		var table = $('#tblThongkencdt').DataTable({
+		     			"lengthMenu": [[10, 20, 50, 100,-1], [10, 20, 50, 100, "Tất cả"]],
+		     			"oLanguage": {
+		                 "sUrl": "/media/cbcc/js/dataTables.vietnam.txt"
+		  			},
+	             	"sDom": "<'dataTables_wrapper'<'clear'><'row-fluid'<'span3'f><'span3'<'pull-right'T>><'span6'p>t<'row-fluid'<'span2'l><'span4'i><'span6'p>>>",
+		      		"oTableTools": {
+		     			"sSwfPath": "/media/cbcc/js/dataTables-1.10.0/swf/copy_csv_xls_pdf.swf",		
+		     			"aButtons": [
+		     							{
+		     								"sExtends": "xls",
+		     								"sButtonText": "Excel",
+		     								"mColumns": [ 0,1,2,3,4,5,6 ],
+		     								"sFileName": "Nhucaudaotao.xls",
+		  	   							"oSelectorOpts": { filter: 'applied'},
+		     							},
+		     							{ 	"sExtends":"print",
+		     								"bShowAll": false
+		     							},
+		     								
+		     						]
+		      		},
+		      		"bSort": true,
+		             	"columnDefs": [{
+		  		   			"targets": [1,2,3,4,6,7],
+		  		   			"orderable": true
+		     				},
+		     				{
+		  	   				"targets": [0,5],
+		  	   				"orderable": false
+		     			}],
+		      		"order": [[ 6, "asc" ]]
+		     		});
 	  			}
 	        });
     	}else alert("Vui lòng chọn đơn vị!");

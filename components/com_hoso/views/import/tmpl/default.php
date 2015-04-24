@@ -20,8 +20,8 @@ defined( '_JEXEC' ) or die( 'Truy cập không hợp lệ' );
 <div id="tab_danhsach" role="tabpanel">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#listimport" aria-controls="home" role="tab" data-toggle="tab">Danh sách import</a></li>
-		    <li role="presentation"><a href="#tabimport" aria-controls="profile" role="tab" data-toggle="tab">Import</a></li>
+		    <li role="presentation" id="li_listimport" class="active"><a href="#listimport" aria-controls="home" role="tab" data-toggle="tab">Danh sách import</a></li>
+		    <li role="presentation" id="li_tabimport"><a href="#tabimport" aria-controls="profile" role="tab" data-toggle="tab">Import</a></li>
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
@@ -29,7 +29,7 @@ defined( '_JEXEC' ) or die( 'Truy cập không hợp lệ' );
 				<div id="danhsachimport">
 				</div>
 			</div>
-			<div role="tabpanel" class="tab-pane" id="tabimport" style="min-height: 1200px">
+			<div class="tab-pane" id="tabimport" role="tabpanel" role="tabpanel" style="min-height: 1200px">
 				<div id="divimport">
 					<div>
 						Chọn tệp tin để upload: 
@@ -289,6 +289,7 @@ jQuery(document).ready(function($){
 			{alert('Vui lòng chọn tệp tin');}
 		else{
 			if ((isExcel(filefullname)) && ((filefullname.split(".").length - 1)==1)){
+				$.blockUI();
 				$.ajax({
 					type: 'POST',
 		  			url: '<?php echo JUri::base(true);?>/index.php?option=com_hoso&controller=import&format=raw&task=uploadcbcc',
@@ -299,7 +300,9 @@ jQuery(document).ready(function($){
 	                processData: false,
 		  			success:function(data){
 			  			$('#ketqua').html(data);
+			  			$.unblockUI();
 			  			refresh();
+			  			$('#fileupload').val('');
 		  			}
 		        });
 			}

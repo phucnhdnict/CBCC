@@ -2,13 +2,14 @@
 class HosoModelTreeview extends JModelLegacy{
 	public function treeView($id_parent,$option = array()){
 		$db = JFactory::getDbo();
+// 		$exceptionUnits = Core::getUnManageDonvi(JFactory::getUser()->id,'com_hoso','treeview','treeview');
 		$exceptionUnits = $this->getUnManageDonvi(JFactory::getUser()->id,'com_hoso','treeview','treeview');
 		$exception_condition = ($exceptionUnits)?' AND a.id NOT IN ('.$exceptionUnits.')':'';
 		$query = 'SELECT a.id,a.parent_id,a.type,CONCAT(a.name," (",IF(b.total_hoso is NULL,0,b.total_hoso),")") AS name,a.level,a.lft,a.rgt,a.active
 					FROM ins_dept AS a
 					LEFT JOIN index_dept AS b ON a.id = b.dept_id
 					WHERE a.active = 1 AND a.parent_id = '.$db->quote($id_parent).$exception_condition.'
-					ORDER BY a.name COLLATE utf8_unicode_ci';
+					ORDER BY a.lft';
 		$db->setQuery($query);
 		$rows = $db->loadAssocList();
 		$arrTypes = array('file','folder','root');
@@ -28,7 +29,7 @@ class HosoModelTreeview extends JModelLegacy{
 		$query->select(array('a.id','a.parent_id','a.type','a.name','a.level','a.lft','a.rgt','a.active'))
 				->from($db->quoteName('ins_dept','a'))
 				->where(array('a.active = 1','a.parent_id = '.$db->quote($id_parent),'a.type <> 0'))
-				->order('a.name COLLATE utf8_unicode_ci');
+				->order('a.lft');
 		$db->setQuery($query);
 		$rows = $db->loadAssocList();
 		$arrTypes = array('file','folder','root');
@@ -50,7 +51,7 @@ class HosoModelTreeview extends JModelLegacy{
 		$query = 'SELECT a.id,a.parent_id,a.type,a.name,a.level,a.lft,a.rgt,a.active
 					FROM ins_dept AS a 
 					WHERE a.active = 1 AND a.parent_id = '.$db->quote($id_parent).$exception_condition.'
-					ORDER BY a.name COLLATE utf8_unicode_ci';
+					ORDER BY a.lft';
 		$db->setQuery($query);
 		$rows = $db->loadAssocList();
 		$arrTypes = array('file','folder','root');
@@ -80,7 +81,7 @@ class HosoModelTreeview extends JModelLegacy{
 					FROM ins_dept AS a
 					LEFT JOIN index_dept AS b ON a.id = b.dept_id
 					WHERE a.active = 1 AND a.parent_id = ".$db->quote($id_parent).$exception_condition."
-					ORDER BY a.name COLLATE utf8_unicode_ci";
+					ORDER BY a.lft";
 		$db->setQuery($query);
 		$rows = $db->loadAssocList();
 		$arrTypes = array('file','folder','root');
