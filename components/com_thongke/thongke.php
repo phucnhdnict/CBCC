@@ -6,8 +6,8 @@
  */
 defined( '_JEXEC' ) or die( 'Restricted access' );
 $controller = JFactory::getApplication()->input->get('controller','thongke');
-require_once (JPATH_COMPONENT.'/controllers/'.ucfirst($controller).'.php');
-require_once JPATH_COMPONENT.'/helpers/Thongke.php';
+require_once (JPATH_COMPONENT.'/controllers/'.$controller.'.php');
+require_once JPATH_COMPONENT.'/helpers/thongke.php';
 $classname  = 'ThongkeController'.ucfirst($controller);
 $controller = new $classname();
 $controller->execute(JFactory::getApplication()->input->get('task'));

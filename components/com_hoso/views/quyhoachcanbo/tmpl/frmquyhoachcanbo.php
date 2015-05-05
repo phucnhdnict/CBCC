@@ -114,11 +114,14 @@ jQuery(document).ready(function($){
 			$.blockUI({ timeout:1000});
 			$('#position').val($('#pos_system_id').find('option:selected').text());
 			var data_frmQuyhoachcanbo = $('#data_frmQuyhoachcanbo').serialize();
-			var url = '<?php echo JUri::base(true);?>/index.php?option=com_hoso&controller=quyhoachcanbo&format=raw&task=saveQuyhoachcanbo';
+			var url = '<?php echo JUri::base(true);?>/index.php?option=com_hoso&controller=quyhoachcanbo&task=saveQuyhoachcanbo';
 			$.post(url, data_frmQuyhoachcanbo, function(data){
-						$('.modal').modal('hide');
-		                $.unblockUI;
+					$('.modal').modal('hide');
+					if (data == true){
 		                a();
+		                loadNoticeBoardSuccess('Thông báo','Xử lý thành công!');
+					}
+					else loadNoticeBoardError('Thông báo','Có lỗi xảy ra, vui lòng liên hệ quản trị viên.');
 			});
 			
 		},

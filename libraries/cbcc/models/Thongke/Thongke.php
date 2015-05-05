@@ -88,7 +88,7 @@ class Thongke_Model_Thongke extends JModelLegacy{
 				hsht.luong_phucap_chucvu
 					from hosochinh hsc
 				join hosochinh_quatrinhhientai as hsht on hsc.id = hsht.hosochinh_id
-				left join city_code 	qq_city 		on qq_city.code = hsc.cadc_code
+				inner join city_code 	qq_city 		on qq_city.code = hsc.cadc_code
 				left join cla_sca_code 	tdcm 		on tdcm.code = hsht.chuyenmon_trinhdo_code and tdcm.tosc_code = 2
 				left join cla_sca_code 	tdllct 		on tdllct.code = hsht.nghiepvu_lyluanchinhtri_code and tdllct.tosc_code = 3
 				left join cla_sca_code 	tdqlnn 		on tdqlnn.code = hsht.nghiepvu_quanlynhanuoc_code and tdqlnn.tosc_code = 5

@@ -24,6 +24,11 @@ class HososViewQuyhoachcanbo extends JViewLegacy {
  	$document->addScript(JUri::base(true).'/media/cbcc/js/dataTables.tableTools.min.js');
  	$document->addStyleSheet(JUri::base(true).'media/cbcc/js/dataTables-1.10.0/css/jquery.dataTables.min.css');
  	$document->addStyleSheet(JUri::base(true).'/media/cbcc/js/dataTables-1.10.0/css/dataTables.tableTools.css');
+ 	// P them
+ 	$document->addScript(JUri::base(true).'/media/cbcc/js/jquery/upload/jquery.fileupload.js');
+ 	$document->addScript(JUri::base(true).'/media/cbcc/js/jquery.colorbox-min.js');
+ 	$document->addScript(JUri::base(true).'/media/cbcc/js/jquery/upload/jquery.iframe-transport.js');
+ 	$document->addStyleSheet(JUri::base(true).'/media/cbcc/css/jquery.fileupload.css');
  	
  }
  public function danhsachquyhoach(){
@@ -38,7 +43,8 @@ class HososViewQuyhoachcanbo extends JViewLegacy {
 		$this->setLayout('hoso_404');
 	}else{
 		$root['root_id'] = $model->getRootTree();
- 		$root['root_name'] = $model->getInfoByDonvi_id($root['root_id']);
+ 		$tmp= $model->getThongtin(array('name'),'ins_dept',null,array('id='.$root['root_id']),null);
+ 		$root['root_name'] = $tmp[0]->name;
 	}
  	$this->assignRef('root_info', $root);
  }

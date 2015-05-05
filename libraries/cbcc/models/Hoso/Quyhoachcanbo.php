@@ -1,11 +1,5 @@
 <?php
 class Hoso_Model_Quyhoachcanbo extends JModelLegacy {
-	function __construct() {
-		parent::__construct ();
-		global $mainframe;
-		$mainframe = JFactory::getApplication ();
-	}
-	//-------------- Các hàm thao tác cây đơn vị --------------------
 	/**
 	 * Lấy node gốc trên tree của acccount đang log
 	 *
@@ -20,21 +14,21 @@ class Hoso_Model_Quyhoachcanbo extends JModelLegacy {
 		$root = Core::getManageUnit($id_user);
 		return $root;
 	}
-	/**
-	 * Lấy thông tin đơn vị từ don_id truyền vào
-	 *
-	 * @param	int	$root_id	node root hiện hành theo account đang log
-	 *
-	 * @return	string	Trả về tên của node
-	 */
-	public function getInfoByDonvi_id($root_id){
+	function getThongtin($field, $table, $arrJoin=null, $where=null, $order=null){
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query	->select(array('name'))
-		->from($db->quoteName('ins_dept'));
-		$query->where($db->quoteName('id').'='.$db->quote($root_id));
+		$query->select($field)
+		->from($table);
+		if (count($arrJoin)>0)
+			foreach ($arrJoin as $key=>$val){
+				$query->join($key, $val);
+			}
+		for($i=0;$i<count($where);$i++)
+			if ($where[$i]!='')
+				$query->where($where);
+		if($order!=null)$query->order($order);
 		$db->setQuery($query);
-		return $db->loadResult();
+		return $db->loadObjectList();
 	}
 	
 	/**

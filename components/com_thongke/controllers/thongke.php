@@ -10,16 +10,6 @@ class ThongkeControllerThongke extends JControllerLegacy {
 		parent::__construct ();
 	}
 	function display($cachable = false, $urlparams = false) {
-// 		$document   =& JFactory::getDocument();
-// 		$viewName   =	JRequest::getVar( 'view', 'dtbdcbcc');
-		 
-// 		JRequest::setVar('controller','dtbdcbcc');
-// 		$viewLayout = JRequest::getVar( 'layout', 'default');
-// 		$viewType   = $document->getType();
-// 		$view =& $this->getView( $viewName, $viewType);
-// 		$view->setLayout($viewLayout);
-		 
-// 		$view->display();
 		parent::display();
 	}
 }

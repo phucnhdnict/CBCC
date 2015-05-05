@@ -11,16 +11,17 @@ class JConfig {
 	public $access = '1';
 	public $debug = '0';
 	public $debug_lang = '0';
-	
 	public $dbtype = 'mysqli';
-// 	public $user = 'root';
-// 	public $host = 'localhost';
-// 	public $password = '';
-// 	public $db = 'cbccvc_v2_2503';
+	
 	public $user = 'root';
-	public $host = '10.49.45.51';
-	public $password = '123456';
-	public $db = 'cbcc_test';
+	public $host = 'localhost';
+	public $password = '';
+	public $db = 'cbccvc_v2_2503';
+
+// 	public $user = 'root';
+// 	public $host = '10.49.45.51';
+// 	public $password = '123456';
+// 	public $db = 'cbcc_test';
 	
 	public $dbprefix = 'jos_';
 	public $live_site = '';
